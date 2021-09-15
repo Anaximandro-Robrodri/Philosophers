@@ -6,7 +6,7 @@
 /*   By: robrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:18:17 by robrodri          #+#    #+#             */
-/*   Updated: 2021/09/11 16:18:19 by robrodri         ###   ########.fr       */
+/*   Updated: 2021/09/15 17:04:57 by robrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ void	*routine(void *tid)
 
 	p = (t_prg*)tid;
 	while (1)
-	{
-		printf("N philos %d\n", p->n_philo);
-		printf("Time to die %d\n", p->die);
-		printf("Time to sleep %d\n", p->slp);
-		printf("Time to eat %d\n", p->eat);
-		printf("N eat %d\n", p->n_eat);
-		sleep(1);
-	}
+	/*Iterar y dividir entre 2 para averiguar cual es par e impar*/
 	return (NULL);
 }

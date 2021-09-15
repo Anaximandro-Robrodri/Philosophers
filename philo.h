@@ -22,9 +22,9 @@
 typedef struct s_philo
 {
 	int				has_eaten;
+	int				idx;
 	struct s_prg	*prg;
 	pthread_t		t_ph;
-
 }	t_philo;
 
 typedef struct s_prg

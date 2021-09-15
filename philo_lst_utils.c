@@ -22,6 +22,7 @@ void	create_table(t_prg *prg)
 		return ;
 	while (i < prg->n_philo)
 	{
+		prg->philo[i].idx = i;
 		pthread_create(&prg->philo[i].t_ph, NULL, routine, (void *)prg);
 		usleep(50);
 		i++;

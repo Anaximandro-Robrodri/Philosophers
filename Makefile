@@ -6,7 +6,7 @@
 #    By: robrodri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 16:17:40 by robrodri          #+#    #+#              #
-#    Updated: 2021/09/11 16:17:46 by robrodri         ###   ########.fr        #
+#    Updated: 2021/09/15 17:00:40 by robrodri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra #-g fsanitize=address
+FLAGS = -Wall -Wextra -g #-fsanitize=address
 
 HEADER = philo.h
 
