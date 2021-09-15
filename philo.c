@@ -78,5 +78,6 @@ int	main(int argc, char **argv)
 			ft_error ();
 	}
 //	print_instructions();
+	pthread_exit(NULL);
 	return (0);
 }

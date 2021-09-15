@@ -14,9 +14,16 @@
 
 void	create_table(t_prg *prg)
 {
-	printf("N philos %d\n", prg->n_philo);
-	printf("Time to die %d\n", prg->die);
-	printf("Time to sleep %d\n", prg->slp);
-	printf("Time to eat %d\n", prg->eat);
-	printf("N eat %d\n", prg->n_eat);
+	int	i;
+
+	i = 0;
+	prg->philo = malloc(sizeof(t_philo*) * prg->n_philo);
+	if (!prg->philo)
+		return ;
+	while (i < prg->n_philo)
+	{
+		pthread_create(&prg->philo[i].t_ph, NULL, routine, (void *)prg);
+		usleep(50);
+		i++;
+	}
 }

@@ -12,7 +12,19 @@
 
 # include "philo.h"
 
-void	routine(void *tid)
+void	*routine(void *tid)
 {
-	printf("ID proceso %ld\n", &tid);
+	t_prg	*p;
+
+	p = (t_prg*)tid;
+	while (1)
+	{
+		printf("N philos %d\n", p->n_philo);
+		printf("Time to die %d\n", p->die);
+		printf("Time to sleep %d\n", p->slp);
+		printf("Time to eat %d\n", p->eat);
+		printf("N eat %d\n", p->n_eat);
+		sleep(1);
+	}
+	return (NULL);
 }

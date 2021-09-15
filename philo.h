@@ -22,8 +22,9 @@
 typedef struct s_philo
 {
 	int				has_eaten;
-	struct t_philo	*right;
-	struct t_philo	*next;
+	struct s_prg	*prg;
+	pthread_t		t_ph;
+
 }	t_philo;
 
 typedef struct s_prg
@@ -33,7 +34,7 @@ typedef struct s_prg
 	int				eat;
 	int				slp;
 	int				n_eat;
-	t_philo			philo;
+	t_philo			*philo;
 }	t_prg;
 
 void	ft_error(void);
@@ -43,5 +44,6 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 int		ft_error_control(int i, char **argv);
 void	create_table(t_prg *prg);
+void	*routine(void *tid);
 
 #endif
