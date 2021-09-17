@@ -50,7 +50,6 @@ static void	store_args(int argc, char **argv, t_prg *prg)
 	}
 	if (i == 5)
 		prg->n_eat = -1;
-	create_table(prg);
 }
 
 static int	check_args(int argc, char **argv)
@@ -73,6 +72,7 @@ int	main(int argc, char **argv)
 		{
 			printf("Diogenes Rules\n");
 			store_args(argc, argv, &prg);
+			create_table(&prg);
 		}
 		else
 			ft_error ();

@@ -19,15 +19,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/*Hacemos n filosofos cada uno con idx*/
-typedef struct s_philo
-{
-	int				has_eaten;
-	int				idx;
-	struct s_prg	*prg;
-	pthread_t		t_ph;
-}	t_philo;
-
 /* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
 {
@@ -36,7 +27,21 @@ typedef struct s_prg
 	int				eat;
 	int				slp;
 	int				n_eat;
+	int				start;
 }	t_prg;
+
+/*Hacemos n filosofos cada uno con idx*/
+typedef struct s_philo
+{
+	int				has_eaten;
+	int				idx;
+	int				l_fork;
+	int				r_fork;
+	t_prg			*prg;
+	pthread_t		t_ph;
+	pthread_mutex_t	ml_fork;
+	pthread_mutex_t	*mr_fork;
+}	t_philo;
 
 void	ft_error(void);
 int		ft_is_space(char a);

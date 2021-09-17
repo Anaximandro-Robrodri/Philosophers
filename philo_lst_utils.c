@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+static void	init_philos(t_philo *ph, t_prg *prg, int i)
+{
+		ph->prg = prg;
+		ph->idx = i + 1;
+		ph->l_fork = 1;
+		ph->r_fork = 1;
+}
+
 void	create_table(t_prg *prg)
 {
 	t_philo	*ph;
@@ -21,10 +29,10 @@ void	create_table(t_prg *prg)
 	if (!ph)
 		return ;
 	i = 0;
-	ph->prg = prg;
 	while (i < prg->n_philo)
 	{
-		ph[i].idx = i;
+		init_philos(&ph[i], prg, i);
+		pthread_mutex_init(&ph[i].ml_fork, NULL);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
 	}

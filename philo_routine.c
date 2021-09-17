@@ -17,10 +17,21 @@ void	*routine(void *tid)
 	t_philo	*ph;
 
 	ph = tid;
-	while (1)
+/*	while (1)
 	{
 		printf("Soy el filo %d\n", ph->idx);
+		printf("El filo %d tiene acceso a t_die %d\n", ph->idx, ph->prg->die);
+		printf("El filo %d tiene acceso a t_eat %d\n", ph->idx, ph->prg->eat);
+		printf("El filo %d tiene acceso a t_slp %d\n", ph->idx, ph->prg->slp);
+		printf("El filo %d tiene acceso a n_eat %d\n", ph->idx, ph->prg->n_eat);
 		sleep(1);
+	}*/
+	pthread_mutex_lock(&ph->ml_fork);
+	if (ph->l_fork)
+	{
+		printf("Philo Nº %d has taken a fork\n", ph->idx);
+		ph->l_fork = 0;
+		pthread_mutex_unlock(&ph->ml_fork);
 	}
 	return (NULL);
 }
