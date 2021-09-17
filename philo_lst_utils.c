@@ -14,17 +14,19 @@
 
 void	create_table(t_prg *prg)
 {
-	int	i;
+	t_philo	*ph;
+	int		i;
 
-	i = 0;
-	prg->philo = malloc(sizeof(t_philo*) * prg->n_philo);
-	if (!prg->philo)
+	ph = malloc(sizeof(t_philo*) * prg->n_philo);
+	if (!ph)
 		return ;
+	i = 0;
+	ph->prg = prg;
 	while (i < prg->n_philo)
 	{
-		prg->philo[i].idx = i;
-		pthread_create(&prg->philo[i].t_ph, NULL, routine, (void *)prg);
-		usleep(50);
+		ph[i].idx = i;
+		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
 	}
+
 }

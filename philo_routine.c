@@ -14,10 +14,13 @@
 
 void	*routine(void *tid)
 {
-	t_prg	*p;
+	t_philo	*ph;
 
-	p = (t_prg*)tid;
+	ph = tid;
 	while (1)
-	/*Iterar y dividir entre 2 para averiguar cual es par e impar*/
+	{
+		printf("Soy el filo %d\n", ph->idx);
+		sleep(1);
+	}
 	return (NULL);
 }

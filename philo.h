@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/*Hacemos n filosofos cada uno con idx*/
 typedef struct s_philo
 {
 	int				has_eaten;
@@ -27,6 +28,7 @@ typedef struct s_philo
 	pthread_t		t_ph;
 }	t_philo;
 
+/* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
 {
 	int				n_philo;
@@ -34,7 +36,6 @@ typedef struct s_prg
 	int				eat;
 	int				slp;
 	int				n_eat;
-	t_philo			*philo;
 }	t_prg;
 
 void	ft_error(void);
