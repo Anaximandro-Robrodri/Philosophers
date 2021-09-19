@@ -12,29 +12,43 @@
 
 #include "philo.h"
 
-static void	init_philos(t_philo *ph, t_prg *prg, int i)
+static pthread_mutex_t	*init_forks(pthread_mutex_t *forks, int n)
 {
-		ph->prg = prg;
-		ph->idx = i + 1;
-		ph->l_fork = 1;
-		ph->r_fork = 1;
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_mutex_init(&forks[i], NULL);
+		i++;
+	}
+	return(forks);
+}
+
+static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*forks)
+{
+	ph->prg = prg;
+	ph->idx = i + 1;
+	ph->m_fork = forks;
 }
 
 void	create_table(t_prg *prg)
 {
 	t_philo	*ph;
+	pthread_mutex_t	*forks = NULL;
 	int		i;
 
 	ph = malloc(sizeof(t_philo*) * prg->n_philo);
-	if (!ph)
+	forks = malloc(sizeof(pthread_mutex_t*) * prg->n_philo);
+	if (!ph || !forks)
 		return ;
 	i = 0;
+	pthread_mutex_init(&prg->m_print, NULL);
+	forks = init_forks(forks, prg->n_philo);
 	while (i < prg->n_philo)
 	{
-		init_philos(&ph[i], prg, i);
-		pthread_mutex_init(&ph[i].ml_fork, NULL);
+		init_philos(&ph[i], prg, i, forks);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
 	}
-
 }

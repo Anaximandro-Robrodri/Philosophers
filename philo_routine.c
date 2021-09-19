@@ -26,12 +26,8 @@ void	*routine(void *tid)
 		printf("El filo %d tiene acceso a n_eat %d\n", ph->idx, ph->prg->n_eat);
 		sleep(1);
 	}*/
-	pthread_mutex_lock(&ph->ml_fork);
-	if (ph->l_fork)
-	{
-		printf("Philo Nº %d has taken a fork\n", ph->idx);
-		ph->l_fork = 0;
-		pthread_mutex_unlock(&ph->ml_fork);
-	}
+	pthread_mutex_lock(&ph->prg->m_print);
+	printf("Philo Nº %d has taken a fork\n", ph->idx);
+	pthread_mutex_unlock(&ph->prg->m_print);
 	return (NULL);
 }
