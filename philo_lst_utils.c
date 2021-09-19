@@ -34,9 +34,9 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*forks)
 
 void	create_table(t_prg *prg)
 {
-	t_philo	*ph;
-	pthread_mutex_t	*forks = NULL;
-	int		i;
+	t_philo			*ph;
+	pthread_mutex_t	*forks;
+	int				i;
 
 	ph = malloc(sizeof(t_philo*) * prg->n_philo);
 	forks = malloc(sizeof(pthread_mutex_t*) * prg->n_philo);
