@@ -14,17 +14,11 @@
 
 void	*routine(void *tid)
 {
-	t_philo	*ph;
+	t_philo	ph;
 
-	ph = tid;
+	ph = *(t_philo*)tid;
 	while (1)
 	{
-		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
-		pthread_mutex_lock(&ph->prg->m_print);
-		printf("Philo %d has taken a fork\n", ph->idx);
-		pthread_mutex_unlock(&ph->prg->m_print);
-		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
-		sleep(1);
 	}
 	return (NULL);
 }

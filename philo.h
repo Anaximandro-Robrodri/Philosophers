@@ -28,6 +28,7 @@ typedef struct s_prg
 	int				slp;
 	int				n_eat;
 	int				start;
+	int				*forks;
 	pthread_mutex_t	m_print;
 }	t_prg ;
 

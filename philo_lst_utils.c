@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static pthread_mutex_t	*init_forks(pthread_mutex_t *forks, int n)
+static pthread_mutex_t	*init_forks(pthread_mutex_t *forks, int n, t_prg *prg)
 {
 	int	i;
 
@@ -20,6 +20,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *forks, int n)
 	while (i < n)
 	{
 		pthread_mutex_init(&forks[i], NULL);
+		prg->forks[i] = 0;
 		i++;
 	}
 	return(forks);
@@ -39,12 +40,13 @@ void	create_table(t_prg *prg)
 	int				i;
 
 	ph = malloc(sizeof(t_philo*) * prg->n_philo);
-	forks = malloc(sizeof(pthread_mutex_t*) * prg->n_philo);
-	if (!ph || !forks)
+	prg->forks = malloc(sizeof(int) * prg->n_philo);
+	forks = malloc(sizeof(pthread_mutex_t) * prg->n_philo);
+	if (!ph || !forks || !prg->forks)
 		return ;
 	i = 0;
 	pthread_mutex_init(&prg->m_print, NULL);
-	forks = init_forks(forks, prg->n_philo);
+	forks = init_forks(forks, prg->n_philo, prg);
 	while (i < prg->n_philo)
 	{
 		init_philos(&ph[i], prg, i, forks);
