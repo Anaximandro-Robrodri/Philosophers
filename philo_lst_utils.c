@@ -31,6 +31,8 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*forks)
 	ph->prg = prg;
 	ph->idx = i + 1;
 	ph->m_fork = forks;
+	ph->l_fork = 0;
+	ph->r_fork = 0;
 }
 
 void	create_table(t_prg *prg)

@@ -37,6 +37,8 @@ typedef struct s_philo
 {
 	int				has_eaten;
 	int				idx;
+	int				l_fork;
+	int				r_fork;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
