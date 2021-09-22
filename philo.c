@@ -70,7 +70,6 @@ int	main(int argc, char **argv)
 	{
 		if (check_args(argc, argv))
 		{
-			printf("Diogenes Rules\n");
 			store_args(argc, argv, &prg);
 			create_table(&prg);
 		}

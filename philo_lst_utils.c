@@ -20,7 +20,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *forks, int n, t_prg *prg)
 	while (i < n)
 	{
 		pthread_mutex_init(&forks[i], NULL);
-		prg->forks[i] = 0;
+		prg->forks[i] = 1;
 		i++;
 	}
 	return(forks);
@@ -52,5 +52,6 @@ void	create_table(t_prg *prg)
 		init_philos(&ph[i], prg, i, forks);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
+		sleep(1);
 	}
 }
