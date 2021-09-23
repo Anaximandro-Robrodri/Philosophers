@@ -30,73 +30,85 @@ void	*routine(void *tid)
 
 	while (1)
 	{
-		if (ph.idx / 2 && !ph.has_eaten)
+		if (ph.idx % 2)
 		{
-			if (ph.prg->forks[ph.idx - 1])
+/*			pthread_mutex_lock(&ph.prg->m_print);
+			printf("Soy el filo %d\n", ph.idx);
+			pthread_mutex_unlock(&ph.prg->m_print);*/
+			if (ph.prg->forks[0] && ph.prg->forks[1])
 			{
-				pthread_mutex_lock(&ph.m_fork[ph.idx - 1]);
-				ph.prg->forks[ph.idx - 1] = 0;
+				pthread_mutex_lock(&ph.m_fork[0]);
+				ph.prg->forks[0] = 0;
 				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d has taken a fork\n", ph.idx);
+				printf("El filo %d ha pillado el tenedor 1\n", ph.idx);
+				pthread_mutex_unlock(&ph.prg->m_print);
+				ph.l_fork = 1;
+				pthread_mutex_lock(&ph.m_fork[1]);
+				ph.prg->forks[1] = 0;
+				pthread_mutex_lock(&ph.prg->m_print);
+				printf("El filo %d ha pillado el tenedor 2\n", ph.idx);
 				pthread_mutex_unlock(&ph.prg->m_print);
 				ph.r_fork = 1;
 			}
-			if (ph.prg->forks[ph.idx - 2])
-			{
-				pthread_mutex_lock(&ph.m_fork[ph.idx - 2]);
-				ph.prg->forks[ph.idx - 2] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d has taken a fork\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.l_fork = 1;
-			}
-			if (ph.r_fork && ph.l_fork)
+			if (ph.l_fork && ph.r_fork)
 			{
 				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d is eating\n", ph.idx);
+				printf("El filo %d is eating\n", ph.idx);
 				pthread_mutex_unlock(&ph.prg->m_print);
-				usleep(ph.prg->eat);
+				ph.prg->forks[0] = 1;
+				ph.prg->forks[1] = 1;
+				ph.l_fork = 0;
 				ph.r_fork = 0;
-				ph.r_fork = 0;
-				pthread_mutex_unlock(&ph.m_fork[ph.idx - 1]);
-				pthread_mutex_unlock(&ph.m_fork[ph.idx - 2]);
 				ph.has_eaten = 1;
+				usleep(ph.prg->eat);
+				pthread_mutex_unlock(&ph.m_fork[0]);
+				pthread_mutex_unlock(&ph.m_fork[1]);
+				pthread_mutex_lock(&ph.prg->m_print);
+				printf("El filo %d is sleeping\n", ph.idx);
+				usleep(ph.prg->slp);
+				pthread_mutex_unlock(&ph.prg->m_print);
 			}
 		}
-		else if (ph.idx % 2 && !ph.has_eaten)
+		else if (ph.idx / 2)
 		{
-			if (ph.prg->forks[ph.idx - 1])
+/*			pthread_mutex_lock(&ph.prg->m_print);
+			printf("Soy el otro %d\n", ph.idx);
+			pthread_mutex_unlock(&ph.prg->m_print);*/
+			if (ph.prg->forks[0] && ph.prg->forks[1])
 			{
-				pthread_mutex_lock(&ph.m_fork[ph.idx - 1]);
-				ph.prg->forks[ph.idx - 1] = 0;
+				pthread_mutex_lock(&ph.m_fork[0]);
+				ph.prg->forks[0] = 0;
 				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d has taken a fork\n", ph.idx);
+				printf("El filo %d ha pillado el tenedor 1\n", ph.idx);
+				pthread_mutex_unlock(&ph.prg->m_print);
+				ph.l_fork = 1;
+				pthread_mutex_lock(&ph.m_fork[1]);
+				ph.prg->forks[1] = 0;
+				pthread_mutex_lock(&ph.prg->m_print);
+				printf("El filo %d ha pillado el tenedor 2\n", ph.idx);
 				pthread_mutex_unlock(&ph.prg->m_print);
 				ph.r_fork = 1;
 			}
-			if (ph.prg->forks[ph.idx])
-			{
-				pthread_mutex_lock(&ph.m_fork[ph.idx - 2]);
-				ph.prg->forks[ph.idx] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d has taken a fork\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.l_fork = 1;
-			}
-			if (ph.r_fork && ph.l_fork)
+			if (ph.l_fork && ph.r_fork)
 			{
 				pthread_mutex_lock(&ph.prg->m_print);
-				printf("Philo %d is eating\n", ph.idx);
+				printf("El filo %d is eating\n", ph.idx);
 				pthread_mutex_unlock(&ph.prg->m_print);
-				usleep(ph.prg->eat);
+				ph.prg->forks[0] = 1;
+				ph.prg->forks[1] = 1;
+				ph.l_fork = 0;
 				ph.r_fork = 0;
-				ph.r_fork = 0;
-				pthread_mutex_unlock(&ph.m_fork[ph.idx - 1]);
-				pthread_mutex_unlock(&ph.m_fork[ph.idx]);
 				ph.has_eaten = 1;
+				usleep(ph.prg->eat);
+				pthread_mutex_unlock(&ph.m_fork[0]);
+				pthread_mutex_unlock(&ph.m_fork[1]);
+				pthread_mutex_lock(&ph.prg->m_print);
+				printf("El filo %d is sleeping\n", ph.idx);
+				usleep(ph.prg->slp);
+				pthread_mutex_unlock(&ph.prg->m_print);
 			}
-			sleep(1);
 		}
+		sleep(1);
 	}
 	return (NULL);
 }

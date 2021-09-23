@@ -19,6 +19,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct	s_status
+{
+	int		alive;
+	int		dead;
+	int		eating;
+	int		thinking;
+	int		sleeping;
+}	t_status;
+
 /* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
 {
@@ -35,6 +44,7 @@ typedef struct s_prg
 /*Hacemos n filosofos cada uno con idx*/
 typedef struct s_philo
 {
+	t_status		sts;
 	int				has_eaten;
 	int				idx;
 	int				l_fork;

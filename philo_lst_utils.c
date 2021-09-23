@@ -33,6 +33,10 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*forks)
 	ph->m_fork = forks;
 	ph->l_fork = 0;
 	ph->r_fork = 0;
+	ph->sts.alive = 1;
+	ph->sts.dead = 0;
+	ph->sts.eating = 0;
+	ph->sts.sleeping = 0;
 }
 
 void	create_table(t_prg *prg)
@@ -54,6 +58,5 @@ void	create_table(t_prg *prg)
 		init_philos(&ph[i], prg, i, forks);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
-		sleep(1);
 	}
 }
