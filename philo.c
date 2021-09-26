@@ -12,12 +12,12 @@
 
 #include "philo.h"
 
-/*static void	print_instructions(void)
+static void	print_instructions(void)
 {
 	printf("Insert arguments like this: \n");
 	printf("[Number of philoshopers] , [Time to die], [Time to eat] \n");
 	printf("[Time to sleep] , (OPTIONAL) [Number of times each philosopher must eat] \n");
-}*/
+}
 
 void	ft_error(void)
 {
@@ -71,12 +71,13 @@ int	main(int argc, char **argv)
 		if (check_args(argc, argv))
 		{
 			store_args(argc, argv, &prg);
-			create_table(&prg);
+		 	create_table(&prg);
 		}
 		else
 			ft_error ();
+		pthread_exit(NULL);
 	}
-//	print_instructions();
-	pthread_exit(NULL);
+	else
+		print_instructions();
 	return (0);
 }

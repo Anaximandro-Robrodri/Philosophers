@@ -17,7 +17,7 @@ void	*routine(void *tid)
 	t_philo	ph;
 
 	ph = *(t_philo*)tid;
-/*//	while (1)
+/*=//	while (1)
 //	{
 	printf("Soy el filo %d\n",ph.idx);
 	if (ph.idx / 2)
@@ -27,14 +27,15 @@ void	*routine(void *tid)
 	ph.prg->forks[1] = 0;
 	pthread_mutex_unlock(&ph.m_fork[1]);
 //	}*/
-
+//	printf("Tenedores %d vale %d\n", 0, ph.prg->forks[0]);
+//	printf("Tenedores %d vale %d\n", 1, ph.prg->forks[1]);
 	while (1)
 	{
 		if (ph.idx % 2)
 		{
-/*			pthread_mutex_lock(&ph.prg->m_print);
+			pthread_mutex_lock(&ph.prg->m_print);
 			printf("Soy el filo %d\n", ph.idx);
-			pthread_mutex_unlock(&ph.prg->m_print);*/
+			pthread_mutex_unlock(&ph.prg->m_print);
 			if (ph.prg->forks[0] && ph.prg->forks[1])
 			{
 				pthread_mutex_lock(&ph.m_fork[0]);
@@ -71,9 +72,9 @@ void	*routine(void *tid)
 		}
 		else if (ph.idx / 2)
 		{
-/*			pthread_mutex_lock(&ph.prg->m_print);
+			pthread_mutex_lock(&ph.prg->m_print);
 			printf("Soy el otro %d\n", ph.idx);
-			pthread_mutex_unlock(&ph.prg->m_print);*/
+			pthread_mutex_unlock(&ph.prg->m_print);
 			if (ph.prg->forks[0] && ph.prg->forks[1])
 			{
 				pthread_mutex_lock(&ph.m_fork[0]);
