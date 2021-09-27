@@ -43,12 +43,12 @@ static void	odd_philo(t_philo *ph)
 	}
 	if (ph->l_fork && ph->r_fork)
 	{
-		usleep(ph->prg->eat)
 		print_eating(ph);
+		usleep(ph->prg->eat);
 		if (ph->idx == 1)
 		{
-			ph->m_fork[ph->idx - 1] = 1;
-			ph->m_fork[ph->prg->n_philo - 1] = 1;
+			ph->prg->forks[ph->idx - 1] = 1;
+			ph->prg->forks[ph->prg->n_philo - 1] = 1;
 			ph->l_fork = 0;
 			ph->r_fork = 0;
 			pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
@@ -56,8 +56,8 @@ static void	odd_philo(t_philo *ph)
 		}
 		else
 		{
-			ph->m_fork[ph->idx - 1] = 1;
-			ph->m_fork[ph->idx - 2] = 1;
+			ph->prg->forks[ph->idx - 1] = 1;
+			ph->prg->forks[ph->idx - 2] = 1;
 			ph->l_fork = 0;
 			ph->r_fork = 0;
 			pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
@@ -81,6 +81,17 @@ static void	even_philo(t_philo *ph)
 		ph->prg->forks[ph->idx - 2] = 0;
 		ph->l_fork = 1;
 		print_fork(ph);
+	}
+	if (ph->l_fork && ph->r_fork)
+	{
+		print_eating(ph);
+		usleep(ph->prg->eat);
+		ph->prg->forks[ph->idx - 1] = 1;
+		ph->prg->forks[ph->idx - 2] = 1;
+		ph->l_fork = 0;
+		ph->r_fork = 0;
+		pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
+		pthread_mutex_unlock(&ph->m_fork[ph->idx - 2]);
 	}
 }
 
