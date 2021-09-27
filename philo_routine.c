@@ -12,104 +12,91 @@
 
 # include "philo.h"
 
+static void	odd_philo(t_philo *ph)
+{
+	if (ph->prg->forks[ph->idx - 1])
+	{
+		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
+		ph->prg->forks[ph->idx - 1] = 0;
+		ph->r_fork = 1;
+		print_fork(ph);
+	}
+	if (ph->idx == 1)
+	{
+		if (ph->prg->forks[ph->prg->n_philo - 1])
+		{
+			pthread_mutex_lock(&ph->m_fork[ph->prg->n_philo - 1]);
+			ph->prg->forks[ph->prg->n_philo - 1] = 0;
+			ph->l_fork = 1;
+			print_fork(ph);
+		}
+	}
+	else
+	{
+		if (ph->prg->forks[ph->idx - 2])
+		{
+			pthread_mutex_lock(&ph->m_fork[ph->idx - 2]);
+			ph->prg->forks[ph->idx - 2] = 0;
+			ph->l_fork = 1;
+			print_fork(ph);
+		}
+	}
+	if (ph->l_fork && ph->r_fork)
+	{
+		usleep(ph->prg->eat)
+		print_eating(ph);
+		if (ph->idx == 1)
+		{
+			ph->m_fork[ph->idx - 1] = 1;
+			ph->m_fork[ph->prg->n_philo - 1] = 1;
+			ph->l_fork = 0;
+			ph->r_fork = 0;
+			pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
+			pthread_mutex_unlock(&ph->m_fork[ph->prg->n_philo - 1]);
+		}
+		else
+		{
+			ph->m_fork[ph->idx - 1] = 1;
+			ph->m_fork[ph->idx - 2] = 1;
+			ph->l_fork = 0;
+			ph->r_fork = 0;
+			pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
+			pthread_mutex_unlock(&ph->m_fork[ph->idx - 2]);
+		}
+	}
+}
+
+static void	even_philo(t_philo *ph)
+{
+	if (ph->prg->forks[ph->idx - 1])
+	{
+		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
+		ph->prg->forks[ph->idx - 1] = 0;
+		ph->r_fork = 1;
+		print_fork(ph);
+	}
+	if (ph->prg->forks[ph->idx - 2])
+	{
+		pthread_mutex_lock(&ph->m_fork[ph->idx - 2]);
+		ph->prg->forks[ph->idx - 2] = 0;
+		ph->l_fork = 1;
+		print_fork(ph);
+	}
+}
+
 void	*routine(void *tid)
 {
 	t_philo	ph;
 
 	ph = *(t_philo*)tid;
-/*=//	while (1)
-//	{
-	printf("Soy el filo %d\n",ph.idx);
 	if (ph.idx / 2)
-		pthread_mutex_lock(&ph.m_fork[1]);
-	if (ph.prg->forks[1])
-		printf("Filo %d pilla sitio\n", ph.idx);
-	ph.prg->forks[1] = 0;
-	pthread_mutex_unlock(&ph.m_fork[1]);
-//	}*/
-//	printf("Tenedores %d vale %d\n", 0, ph.prg->forks[0]);
-//	printf("Tenedores %d vale %d\n", 1, ph.prg->forks[1]);
-	while (1)
+		usleep(50);
+	while (ph.sts.alive)
 	{
 		if (ph.idx % 2)
-		{
-			pthread_mutex_lock(&ph.prg->m_print);
-			printf("Soy el filo %d\n", ph.idx);
-			pthread_mutex_unlock(&ph.prg->m_print);
-			if (ph.prg->forks[0] && ph.prg->forks[1])
-			{
-				pthread_mutex_lock(&ph.m_fork[0]);
-				ph.prg->forks[0] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d ha pillado el tenedor 1\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.l_fork = 1;
-				pthread_mutex_lock(&ph.m_fork[1]);
-				ph.prg->forks[1] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d ha pillado el tenedor 2\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.r_fork = 1;
-			}
-			if (ph.l_fork && ph.r_fork)
-			{
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d is eating\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.prg->forks[0] = 1;
-				ph.prg->forks[1] = 1;
-				ph.l_fork = 0;
-				ph.r_fork = 0;
-				ph.has_eaten = 1;
-				usleep(ph.prg->eat);
-				pthread_mutex_unlock(&ph.m_fork[0]);
-				pthread_mutex_unlock(&ph.m_fork[1]);
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d is sleeping\n", ph.idx);
-				usleep(ph.prg->slp);
-				pthread_mutex_unlock(&ph.prg->m_print);
-			}
-		}
-		else if (ph.idx / 2)
-		{
-			pthread_mutex_lock(&ph.prg->m_print);
-			printf("Soy el otro %d\n", ph.idx);
-			pthread_mutex_unlock(&ph.prg->m_print);
-			if (ph.prg->forks[0] && ph.prg->forks[1])
-			{
-				pthread_mutex_lock(&ph.m_fork[0]);
-				ph.prg->forks[0] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d ha pillado el tenedor 1\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.l_fork = 1;
-				pthread_mutex_lock(&ph.m_fork[1]);
-				ph.prg->forks[1] = 0;
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d ha pillado el tenedor 2\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.r_fork = 1;
-			}
-			if (ph.l_fork && ph.r_fork)
-			{
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d is eating\n", ph.idx);
-				pthread_mutex_unlock(&ph.prg->m_print);
-				ph.prg->forks[0] = 1;
-				ph.prg->forks[1] = 1;
-				ph.l_fork = 0;
-				ph.r_fork = 0;
-				ph.has_eaten = 1;
-				usleep(ph.prg->eat);
-				pthread_mutex_unlock(&ph.m_fork[0]);
-				pthread_mutex_unlock(&ph.m_fork[1]);
-				pthread_mutex_lock(&ph.prg->m_print);
-				printf("El filo %d is sleeping\n", ph.idx);
-				usleep(ph.prg->slp);
-				pthread_mutex_unlock(&ph.prg->m_print);
-			}
-		}
-		sleep(1);
+			odd_philo(&ph);
+		else
+			even_philo(&ph);
 	}
 	return (NULL);
 }

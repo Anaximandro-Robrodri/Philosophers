@@ -15,7 +15,8 @@ NAME = philo
 SRC =	philo.c \
 		philo_utils.c \
 		philo_lst_utils.c \
-		philo_routine.c
+		philo_routine.c \
+		philo_prints.c
 
 OBJS = $(SRC:.c=.o)
 

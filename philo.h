@@ -52,16 +52,22 @@ typedef struct s_philo
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
-
 }	t_philo ;
 
+/*Just parsing and stuff*/
 void	ft_error(void);
 int		ft_is_space(char a);
 int		ft_is_sign(char a);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 int		ft_error_control(int i, char **argv);
+/*Important functions for philos*/
 void	create_table(t_prg *prg);
 void	*routine(void *tid);
+/* Print messages functions*/
+void	print_fork(t_philo *ph);
+void	print_eating(t_philo *ph);
+void	print_sleeping(t_philo *ph);
+void	print_thinking(t_philo *ph);
 
 #endif
