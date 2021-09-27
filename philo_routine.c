@@ -14,6 +14,7 @@
 
 static void	odd_philo(t_philo *ph)
 {
+	print_thinking(ph);
 	if (ph->prg->forks[ph->idx - 1])
 	{
 		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
@@ -63,11 +64,14 @@ static void	odd_philo(t_philo *ph)
 			pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
 			pthread_mutex_unlock(&ph->m_fork[ph->idx - 2]);
 		}
+		print_sleeping(ph);
+		usleep(ph->prg->slp);
 	}
 }
 
 static void	even_philo(t_philo *ph)
 {
+	print_thinking(ph);
 	if (ph->prg->forks[ph->idx - 1])
 	{
 		pthread_mutex_lock(&ph->m_fork[ph->idx - 1]);
@@ -92,6 +96,8 @@ static void	even_philo(t_philo *ph)
 		ph->r_fork = 0;
 		pthread_mutex_unlock(&ph->m_fork[ph->idx - 1]);
 		pthread_mutex_unlock(&ph->m_fork[ph->idx - 2]);
+		print_sleeping(ph);
+		usleep(ph->prg->slp);
 	}
 }
 
