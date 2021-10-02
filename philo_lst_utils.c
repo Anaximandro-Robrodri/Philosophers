@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+int	get_time_start(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
 static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 {
 	int	i;
@@ -28,17 +36,13 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 
 static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 {
-//	printf("Antes  Tenedores %d vale %d\n", i, prg->forks[i]);
 	ph->prg = prg;
-//	printf("Struct Tenedores %d vale %d\n", i, ph->prg->forks[i]);
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
 	ph->l_fork = 0;
 	ph->r_fork = 0;
-	ph->sts.alive = 1;
-	ph->sts.dead = 0;
-	ph->sts.eating = 0;
-	ph->sts.sleeping = 0;
+	ph->alive = 1;
+	ph->start = get_time_start();
 }
 
 void	create_table(t_prg *prg)
@@ -58,8 +62,9 @@ void	create_table(t_prg *prg)
 	while (i < prg->n_philo)
 	{
 		init_philos(&ph[i], prg, i, m_f);
-//		printf("Salida |%d|\n", ph->prg->forks[i]);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
 	}
+	if (ft_dead_checker(ph, prg->n_philo) == -1)
+		exit(0);
 }

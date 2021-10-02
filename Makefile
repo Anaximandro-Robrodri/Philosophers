@@ -16,7 +16,8 @@ SRC =	philo.c \
 		philo_utils.c \
 		philo_lst_utils.c \
 		philo_routine.c \
-		philo_prints.c
+		philo_prints.c \
+		philo_more_utils.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -41,4 +42,4 @@ re : fclean all
 norm :
 	norminette $(SRC) $(HEADER)
 
-.PHONY: all re m clean fclean bonus
+.PHONY: all re m clean fclean bonus norm

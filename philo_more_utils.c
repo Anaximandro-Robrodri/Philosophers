@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_routine.c                                    :+:      :+:    :+:   */
+/*   philo_more_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: robrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/11 16:18:17 by robrodri          #+#    #+#             */
-/*   Updated: 2021/09/15 17:04:57 by robrodri         ###   ########.fr       */
+/*   Created: 2021/10/02 10:51:05 by robrodri          #+#    #+#             */
+/*   Updated: 2021/10/02 10:51:06 by robrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-static void	action_eat(t_philo *ph)
+int	ft_dead_checker(t_philo *ph, int n)
 {
+	int	i;
 
-}
-
-static void	action_tnk(t_philo *ph)
-{
-	print_thinking(ph);
-	if (get_time_start() > ph->start + ph->prg->die)
-		ph->alive = 0;
-	ph->start = get_time_start();
-}
-
-void	*routine(void *tid)
-{
-	t_philo	ph;
-
-	ph = *(t_philo*)tid;
-//	if (ph.idx / 2)
-//		usleep(50);
-	while (ph.alive)
+	while (1)
 	{
-		action_tnk(&ph);
-		action_eat(&ph);
-//		action_slp();
+		i = 0;
+		while (i < n)
+		{
+			if (!ph[i].alive)
+				return (-1);
+			i++;
+		}
 	}
-	printf("El philo %d se ha morido\n", ph.idx);
-	return (NULL);
 }

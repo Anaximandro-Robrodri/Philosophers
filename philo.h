@@ -18,15 +18,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-typedef struct	s_status
-{
-	int		alive;
-	int		dead;
-	int		eating;
-	int		thinking;
-	int		sleeping;
-}	t_status;
+# include <sys/time.h>
 
 /* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
@@ -36,7 +28,6 @@ typedef struct s_prg
 	int				eat;
 	int				slp;
 	int				n_eat;
-	int				start;
 	int				*forks;
 	pthread_mutex_t	m_print;
 }	t_prg ;
@@ -44,11 +35,12 @@ typedef struct s_prg
 /*Hacemos n filosofos cada uno con idx*/
 typedef struct s_philo
 {
-	t_status		sts;
+	int				alive;
 	int				has_eaten;
 	int				idx;
 	int				l_fork;
 	int				r_fork;
+	int				start;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
@@ -64,6 +56,8 @@ int		ft_error_control(int i, char **argv);
 /*Important functions for philos*/
 void	create_table(t_prg *prg);
 void	*routine(void *tid);
+int		get_time_start(void);
+int		ft_dead_checker(t_philo *ph, int n);
 /* Print messages functions*/
 void	print_fork(t_philo *ph);
 void	print_eating(t_philo *ph);
