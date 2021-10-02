@@ -15,28 +15,28 @@
 void	print_fork(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("Philo %d has taken a fork!\n", ph->idx);
+	printf("(%d)Philo %d has taken a fork!\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_eating(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("Philo %d is eating\n", ph->idx);
+	printf("(%d)Philo %d is eating\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_sleeping(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("Philo %d is sleeping\n", ph->idx);
+	printf("(%d)Philo %d is sleeping\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_thinking(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("Philo %d is thinking\n", ph->idx);
+	printf("(%d)Philo %d is thinking\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 

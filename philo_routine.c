@@ -14,15 +14,27 @@
 
 static void	action_eat(t_philo *ph)
 {
+	print_eating(ph);
+	usleep(ph->prg->eat * 1000);
+//	if (get_time_start() > ph->start + ph->prg->slp)
+//		ph->alive = 0;
+}
 
+static void	action_slp(t_philo *ph)
+{
+	print_sleeping(ph);
+//	printf("Estamos en %d\n", get_time_start());
+//	printf("La suma es %d\n", ph->start + ph->prg->slp);
+	usleep(ph->prg->slp * 1000);
+//	if (get_time_start() > ph->start + ph->prg->slp)
+//		ph->alive = 0;
 }
 
 static void	action_tnk(t_philo *ph)
 {
 	print_thinking(ph);
-	if (get_time_start() > ph->start + ph->prg->die)
-		ph->alive = 0;
-	ph->start = get_time_start();
+//	if (get_time_start() > ph->start + ph->prg->die)
+//		ph->alive = 0;
 }
 
 void	*routine(void *tid)
@@ -34,9 +46,9 @@ void	*routine(void *tid)
 //		usleep(50);
 	while (ph.alive)
 	{
-		action_tnk(&ph);
 		action_eat(&ph);
-//		action_slp();
+		action_slp(&ph);
+		action_tnk(&ph);
 	}
 	printf("El philo %d se ha morido\n", ph.idx);
 	return (NULL);
