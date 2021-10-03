@@ -75,7 +75,6 @@ int	main(int argc, char **argv)
 		}
 		else
 			ft_error ();
-		pthread_exit(NULL);
 	}
 	else
 		print_instructions();

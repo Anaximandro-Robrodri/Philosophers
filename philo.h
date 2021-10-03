@@ -38,9 +38,10 @@ typedef struct s_philo
 	int				alive;
 	int				has_eaten;
 	int				idx;
-	int				l_fork;
-	int				r_fork;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
 	int				start;
+	int				time_now;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
@@ -58,6 +59,7 @@ void	create_table(t_prg *prg);
 void	*routine(void *tid);
 int		get_time_start(void);
 int		ft_dead_checker(t_philo *ph, int n);
+void	ft_join_threads(t_philo *ph, int n);
 /* Print messages functions*/
 void	print_fork(t_philo *ph);
 void	print_eating(t_philo *ph);

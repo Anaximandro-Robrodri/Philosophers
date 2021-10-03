@@ -27,3 +27,23 @@ int	ft_dead_checker(t_philo *ph, int n)
 		}
 	}
 }
+
+void	ft_join_threads(t_philo *ph, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_join(ph[i].t_ph, NULL);
+		i++;
+	}
+}
+
+int	get_time_start(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}

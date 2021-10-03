@@ -12,12 +12,18 @@
 
 #include "philo.h"
 
-int	get_time_start(void)
+static	void	asign_forks(t_philo *ph, int i, t_prg *prg)
 {
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	if (i == 0)
+	{
+		ph[i].r_fork = &ph->m_fork[prg->n_philo - 1];
+		ph[i].l_fork = &ph->m_fork[i];
+	}
+	else
+	{
+		ph[i].r_fork = &ph->m_fork[i - 1];
+		ph[i].l_fork = &ph->m_fork[i];
+	}
 }
 
 static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
@@ -31,6 +37,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 		prg->forks[i] = 1;
 		i++;
 	}
+	pthread_mutex_init(&prg->m_print, NULL);
 	return(m_f);
 }
 
@@ -39,10 +46,10 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 	ph->prg = prg;
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
-	ph->l_fork = 0;
-	ph->r_fork = 0;
+	asign_forks(ph, i, prg);
 	ph->alive = 1;
 	ph->start = get_time_start();
+	ph->time_now = ph->start;
 }
 
 void	create_table(t_prg *prg)
@@ -56,15 +63,16 @@ void	create_table(t_prg *prg)
 	m_f = malloc(sizeof(pthread_mutex_t) * prg->n_philo);
 	if (!ph || !m_f || !prg->forks)
 		return ;
-	pthread_mutex_init(&prg->m_print, NULL);
 	m_f = init_forks(m_f, prg->n_philo, prg);
 	i = 0;
 	while (i < prg->n_philo)
 	{
 		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
+		usleep(100);
 		i++;
 	}
+	ft_join_threads(ph, prg->n_philo);
 	if (ft_dead_checker(ph, prg->n_philo) == -1)
 		exit(0);
 }
