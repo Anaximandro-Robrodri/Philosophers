@@ -14,42 +14,33 @@
 
 static void	action_eat(t_philo *ph)
 {
-	if (ph->idx / 2)		//PHILO PAR
+	if (!(ph->idx % 2))		//PHILO PAR
+		odd_philo(ph);
+	else					//PHILO IMPAR
 	{
-//		odd_philo(ph);
-		if (ph->prg->forks[ph->idx - 1])
-		{
-			print_fork(ph);
-			ph->prg->forks[ph->idx - 1] = 0;
-		}
-		if (ph->prg->forks[ph->idx - 2])
-		{
-			print_fork(ph);
-			ph->prg->forks[ph->idx - 2] = 0;
-		}
+		if (ph->idx == 1)
+			even_philo(ph, ph->prg->n_philo - 1, 0);
+		else
+			even_philo(ph, ph->idx - 2, ph->idx - 1);
 	}
-/*	else					//PHILO IMPAR
-	{
-//		even_philo(ph);
-	}*/
 }
 
-/*static void	action_slp(t_philo *ph)
+static void	action_slp(t_philo *ph)
 {
 	print_sleeping(ph);
 	usleep(ph->prg->slp * 1000);
-	if (get_time_start() > ph->time_now + ph->prg->slp)
-		ph->alive = 0;
+//	if (get_time_start() > ph->time_now + ph->prg->slp)
+//		ph->alive = 0;
 	ph->time_now = get_time_start();
 }
 
 static void	action_tnk(t_philo *ph)
 {
 	print_thinking(ph);
-	if (get_time_start() > ph->time_now + ph->prg->die)
-		ph->alive = 0;
+//	if (get_time_start() > ph->time_now + ph->prg->die)
+//		ph->alive = 0;
 	ph->time_now = get_time_start();
-}*/
+}
 
 void	*routine(void *tid)
 {
@@ -61,8 +52,8 @@ void	*routine(void *tid)
 	while (ph.alive)
 	{
 		action_eat(&ph);
-//		action_slp(&ph);
-//		action_tnk(&ph);
+		action_slp(&ph);
+		action_tnk(&ph);
 	}
 	printf("(%d)Philo %d se ha morido\n", ph.time_now - ph.start, ph.idx);
 	return (NULL);

@@ -12,20 +12,6 @@
 
 #include "philo.h"
 
-static	void	asign_forks(t_philo *ph, int i, t_prg *prg)
-{
-	if (i == 0)
-	{
-		ph[i].r_fork = &ph->m_fork[prg->n_philo - 1];
-		ph[i].l_fork = &ph->m_fork[i];
-	}
-	else
-	{
-		ph[i].r_fork = &ph->m_fork[i - 1];
-		ph[i].l_fork = &ph->m_fork[i];
-	}
-}
-
 static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 {
 	int	i;
@@ -46,7 +32,8 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 	ph->prg = prg;
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
-	asign_forks(ph, i, prg);
+	ph->l_fork = 0;
+	ph->r_fork = 0;
 	ph->alive = 1;
 	ph->start = get_time_start();
 	ph->time_now = ph->start;
