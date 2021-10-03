@@ -12,16 +12,29 @@
 
 # include "philo.h"
 
-/*static void	action_eat(t_philo *ph)
+static void	action_eat(t_philo *ph)
 {
-	print_eating(ph);
-	usleep(ph->prg->eat * 1000);
-	if (get_time_start() > ph->time_now + ph->prg->slp)
-		ph->alive = 0;
-	ph->time_now = get_time_start();
+	if (ph->idx / 2)		//PHILO PAR
+	{
+//		odd_philo(ph);
+		if (ph->prg->forks[ph->idx - 1])
+		{
+			print_fork(ph);
+			ph->prg->forks[ph->idx - 1] = 0;
+		}
+		if (ph->prg->forks[ph->idx - 2])
+		{
+			print_fork(ph);
+			ph->prg->forks[ph->idx - 2] = 0;
+		}
+	}
+/*	else					//PHILO IMPAR
+	{
+//		even_philo(ph);
+	}*/
 }
 
-static void	action_slp(t_philo *ph)
+/*static void	action_slp(t_philo *ph)
 {
 	print_sleeping(ph);
 	usleep(ph->prg->slp * 1000);
@@ -43,21 +56,14 @@ void	*routine(void *tid)
 	t_philo	ph;
 
 	ph = *(t_philo*)tid;
-//	if (ph.idx / 2)
-//		usleep(50);
+	if (ph.idx / 2)
+		usleep(50);
 	while (ph.alive)
 	{
-	/*	action_eat(&ph);
-		action_slp(&ph);
-		action_tnk(&ph);*/
-		if (ph.prg->forks[0])
-		{
-			pthread_mutex_lock(ph.r_fork);
-			ph.prg->forks[0] = 0;
-			printf("Puta, %d\n", ph.idx);
-			pthread_mutex_unlock(ph.r_fork);
-		}
+		action_eat(&ph);
+//		action_slp(&ph);
+//		action_tnk(&ph);
 	}
-	printf("El philo %d se ha morido\n", ph.idx);
+	printf("(%d)Philo %d se ha morido\n", ph.time_now - ph.start, ph.idx);
 	return (NULL);
 }
