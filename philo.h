@@ -30,6 +30,9 @@ typedef struct s_prg
 	int				n_eat;
 	int				*forks;
 	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_slp;
+	pthread_mutex_t	m_eat;
+	pthread_mutex_t	m_think;
 }	t_prg ;
 
 /*Hacemos n filosofos cada uno con idx*/
@@ -60,8 +63,7 @@ void	*routine(void *tid);
 int		get_time_start(void);
 int		ft_dead_checker(t_philo *ph, int n);
 void	ft_join_threads(t_philo *ph, int n);
-void	odd_philo(t_philo *ph);
-void	even_philo(t_philo *ph, int i, int j);
+void	philo_eat(t_philo *ph, int left, int right);
 /* Print messages functions*/
 void	print_fork(t_philo *ph);
 void	print_eating(t_philo *ph);

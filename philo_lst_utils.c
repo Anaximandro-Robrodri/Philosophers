@@ -24,6 +24,9 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 		i++;
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
+	pthread_mutex_init(&prg->m_slp, NULL);
+	pthread_mutex_init(&prg->m_eat, NULL);
+	pthread_mutex_init(&prg->m_think, NULL);
 	return(m_f);
 }
 

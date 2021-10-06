@@ -14,32 +14,36 @@
 
 static void	action_eat(t_philo *ph)
 {
-	if (!(ph->idx % 2))		//PHILO PAR
-		odd_philo(ph);
-	else					//PHILO IMPAR
-	{
-		if (ph->idx == 1)
-			even_philo(ph, ph->prg->n_philo - 1, 0);
-		else
-			even_philo(ph, ph->idx - 2, ph->idx - 1);
-	}
+	pthread_mutex_lock(&ph->prg->m_eat);
+	if (ph->idx == 1)
+		philo_eat(ph, ph->prg->n_philo - 1, 0);
+	else
+		philo_eat(ph, ph->idx - 2, ph->idx - 1);
+	if (get_time_start() > ph->time_now + ph->prg->die)
+		ph->alive = 0;
+	ph->time_now = get_time_start();
+	pthread_mutex_unlock(&ph->prg->m_eat);
 }
 
 static void	action_slp(t_philo *ph)
 {
+	pthread_mutex_lock(&ph->prg->m_slp);
 	print_sleeping(ph);
 	usleep(ph->prg->slp * 1000);
-//	if (get_time_start() > ph->time_now + ph->prg->slp)
-//		ph->alive = 0;
+	if (get_time_start() > ph->time_now + ph->prg->die)
+		ph->alive = 0;
 	ph->time_now = get_time_start();
+	pthread_mutex_unlock(&ph->prg->m_slp);
 }
 
 static void	action_tnk(t_philo *ph)
 {
+	pthread_mutex_lock(&ph->prg->m_think);
 	print_thinking(ph);
 //	if (get_time_start() > ph->time_now + ph->prg->die)
 //		ph->alive = 0;
 	ph->time_now = get_time_start();
+	pthread_mutex_unlock(&ph->prg->m_think);
 }
 
 void	*routine(void *tid)
