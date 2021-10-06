@@ -15,28 +15,34 @@
 void	print_fork(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("(%d)Philo %d has taken a fork!\n", get_time_start() - ph->start, ph->idx);
+	printf("(%d) Philo %d has taken a fork!\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_eating(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("(%d)Philo %d is eating\n", get_time_start() - ph->start, ph->idx);
+	printf("(%d) Philo %d is eating\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_sleeping(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("(%d)Philo %d is sleeping\n", get_time_start() - ph->start, ph->idx);
+	printf("(%d) Philo %d is sleeping\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
 void	print_thinking(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("(%d)Philo %d is thinking\n", get_time_start() - ph->start, ph->idx);
+	printf("(%d) Philo %d is thinking\n", get_time_start() - ph->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
+void	print_dead(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->prg->m_print);
+	printf("(%d) Philo %d se ha morido\n", ph->time_now - ph->start, ph->idx);
+	pthread_mutex_unlock(&ph->prg->m_print);
+}

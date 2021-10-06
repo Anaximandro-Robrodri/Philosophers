@@ -27,6 +27,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	pthread_mutex_init(&prg->m_slp, NULL);
 	pthread_mutex_init(&prg->m_eat, NULL);
 	pthread_mutex_init(&prg->m_think, NULL);
+	pthread_mutex_init(&prg->m_time, NULL);
 	return(m_f);
 }
 
@@ -59,10 +60,12 @@ void	create_table(t_prg *prg)
 	{
 		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-		usleep(100);
+//		usleep(100);
 		i++;
 	}
-	ft_join_threads(ph, prg->n_philo);
 	if (ft_dead_checker(ph, prg->n_philo) == -1)
-		exit(0);
+	{
+		ft_join_threads(ph, prg->n_philo);
+		return ;
+	}
 }

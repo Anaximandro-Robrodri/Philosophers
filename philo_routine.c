@@ -15,34 +15,38 @@
 static void	action_eat(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_eat);
-	if (ph->idx == 1)
-		philo_eat(ph, ph->prg->n_philo - 1, 0);
-	else
-		philo_eat(ph, ph->idx - 2, ph->idx - 1);
-	if (get_time_start() > ph->time_now + ph->prg->die)
-		ph->alive = 0;
-	ph->time_now = get_time_start();
+	if (ph->alive)
+	{
+		if (ph->idx == 1)
+			philo_eat(ph, ph->prg->n_philo - 1, 0);
+		else
+			philo_eat(ph, ph->idx - 2, ph->idx - 1);
+	}
+//	is_he_alive(ph);
+//	ph->time_now = get_time_start();
 	pthread_mutex_unlock(&ph->prg->m_eat);
 }
 
 static void	action_slp(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_slp);
-	print_sleeping(ph);
-	usleep(ph->prg->slp * 1000);
-	if (get_time_start() > ph->time_now + ph->prg->die)
-		ph->alive = 0;
-	ph->time_now = get_time_start();
+	if (ph->alive)
+	{
+		print_sleeping(ph);
+		usleep(ph->prg->slp * 1000);
+	}
+//	is_he_alive(ph);
+//	ph->time_now = get_time_start();
 	pthread_mutex_unlock(&ph->prg->m_slp);
 }
 
 static void	action_tnk(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_think);
-	print_thinking(ph);
-	if (get_time_start() > ph->time_now + ph->prg->die)
-		ph->alive = 0;
-	ph->time_now = get_time_start();
+	if (ph->alive)
+		print_thinking(ph);
+//	is_he_alive(ph);
+//	ph->time_now = get_time_start();
 	pthread_mutex_unlock(&ph->prg->m_think);
 }
 
@@ -55,10 +59,18 @@ void	*routine(void *tid)
 		usleep(50);
 	while (ph.alive)
 	{
+//		printf("Philo %d creado al %d\n", ph.idx, get_time_start() - ph.start);
+		if (!is_he_alive(&ph))
+			break ;
 		action_eat(&ph);
+		if (!is_he_alive(&ph))
+			break ;
 		action_slp(&ph);
+		if (!is_he_alive(&ph))
+			break ;
 		action_tnk(&ph);
 	}
-	printf("(%d)Philo %d se ha morido\n", ph.time_now - ph.start, ph.idx);
+	if (!ph.alive)
+		print_dead(&ph);
 	return (NULL);
 }

@@ -48,6 +48,24 @@ int	get_time_start(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
+int	is_he_alive(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->prg->m_time);
+	if (get_time_start() > ph->time_now + ph->prg->die)
+	{
+		if (ph->alive == 1)
+		{
+			ph->alive = 0;
+			ph->time_now = get_time_start();
+		}
+		pthread_mutex_unlock(&ph->prg->m_time);
+		return (0);
+	}
+	ph->time_now = get_time_start();
+	pthread_mutex_unlock(&ph->prg->m_time);
+	return (1);
+}
+
 void	philo_eat(t_philo *ph, int left, int right)
 {
 	if (ph->prg->forks[right])
