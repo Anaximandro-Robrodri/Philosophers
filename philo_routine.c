@@ -40,8 +40,8 @@ static void	action_tnk(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_think);
 	print_thinking(ph);
-//	if (get_time_start() > ph->time_now + ph->prg->die)
-//		ph->alive = 0;
+	if (get_time_start() > ph->time_now + ph->prg->die)
+		ph->alive = 0;
 	ph->time_now = get_time_start();
 	pthread_mutex_unlock(&ph->prg->m_think);
 }
