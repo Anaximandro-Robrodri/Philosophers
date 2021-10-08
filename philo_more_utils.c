@@ -21,6 +21,7 @@ int	ft_dead_checker(t_philo *ph, int n)
 		i = 0;
 		while (i < n)
 		{
+			ph[i].time_dead = get_time_start() - ph[i].time_now + ph[i].prg->die;
 			if (!ph[i].alive)
 				return (-1);
 			i++;

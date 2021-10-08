@@ -59,7 +59,6 @@ void	*routine(void *tid)
 		usleep(50);
 	while (ph.alive)
 	{
-//		printf("Philo %d creado al %d\n", ph.idx, get_time_start() - ph.start);
 		if (!is_he_alive(&ph))
 			break ;
 		action_eat(&ph);

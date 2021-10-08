@@ -43,6 +43,6 @@ void	print_thinking(t_philo *ph)
 void	print_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf("(%d) Philo %d se ha morido\n", ph->time_now - ph->start, ph->idx);
+	printf("(%d) Philo %d se ha morido\n", ph->time_dead, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }

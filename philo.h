@@ -46,6 +46,7 @@ typedef struct s_philo
 	int				l_fork;
 	int				start;
 	int				time_now;
+	int				time_dead;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;

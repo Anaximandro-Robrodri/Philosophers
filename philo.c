@@ -27,29 +27,18 @@ void	ft_error(void)
 
 static void	store_args(int argc, char **argv, t_prg *prg)
 {
-	int	i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (i == 1)
-		{
-			prg->n_philo = ft_atoi(argv[i]);
-			if (prg->n_philo > MAX_PHILO || prg->n_philo < 2)
-				ft_error ();
-		}
-		else if (i == 2)
-			prg->die = ft_atoi(argv[i]);
-		else if (i == 3)
-			prg->eat = ft_atoi(argv[i]);
-		else if (i == 4)
-			prg->slp = ft_atoi(argv[i]);
-		else if (i == 5)
-			prg->n_eat = ft_atoi(argv[i]);
-		i++;
-	}
-	if (i == 5)
+	prg->n_philo = ft_atoi(argv[1]);
+	if (prg->n_philo > MAX_PHILO || prg->n_philo < 2)
+		ft_error ();
+	prg->die = ft_atoi(argv[2]);
+	prg->eat = ft_atoi(argv[3]);
+	prg->slp = ft_atoi(argv[4]);
+	if (argc == 6)
+		prg->n_eat = ft_atoi(argv[5]);
+	else
 		prg->n_eat = -1;
+	if (!prg->die || !prg->eat || !prg->slp || !prg->n_eat)
+		ft_error();
 }
 
 static int	check_args(int argc, char **argv)
