@@ -24,10 +24,9 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 		i++;
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
-	pthread_mutex_init(&prg->m_slp, NULL);
 	pthread_mutex_init(&prg->m_eat, NULL);
-	pthread_mutex_init(&prg->m_think, NULL);
-	pthread_mutex_init(&prg->m_time, NULL);
+	prg->start = get_time_start();
+	prg->now = prg->start;
 	return(m_f);
 }
 
@@ -39,8 +38,6 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 	ph->l_fork = 0;
 	ph->r_fork = 0;
 	ph->alive = 1;
-	ph->start = get_time_start();
-	ph->time_now = ph->start;
 }
 
 void	create_table(t_prg *prg)
@@ -60,7 +57,6 @@ void	create_table(t_prg *prg)
 	{
 		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-//		usleep(100);
 		i++;
 	}
 	if (ft_dead_checker(ph, prg->n_philo) == -1)

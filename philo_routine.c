@@ -22,32 +22,22 @@ static void	action_eat(t_philo *ph)
 		else
 			philo_eat(ph, ph->idx - 2, ph->idx - 1);
 	}
-//	is_he_alive(ph);
-//	ph->time_now = get_time_start();
 	pthread_mutex_unlock(&ph->prg->m_eat);
 }
 
 static void	action_slp(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->prg->m_slp);
 	if (ph->alive)
 	{
 		print_sleeping(ph);
 		usleep(ph->prg->slp * 1000);
 	}
-//	is_he_alive(ph);
-//	ph->time_now = get_time_start();
-	pthread_mutex_unlock(&ph->prg->m_slp);
 }
 
 static void	action_tnk(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->prg->m_think);
 	if (ph->alive)
 		print_thinking(ph);
-//	is_he_alive(ph);
-//	ph->time_now = get_time_start();
-	pthread_mutex_unlock(&ph->prg->m_think);
 }
 
 void	*routine(void *tid)

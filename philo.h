@@ -13,6 +13,10 @@
 #ifndef PHILO_H
 # define PHILO_H
 # define MAX_PHILO 200
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define CYAN "\033[0;36m"
+# define RESET "\033[0m"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>
@@ -29,11 +33,11 @@ typedef struct s_prg
 	int				slp;
 	int				n_eat;
 	int				*forks;
+	int				start;
+	int				now;
+	int				dead;
 	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_slp;
 	pthread_mutex_t	m_eat;
-	pthread_mutex_t	m_think;
-	pthread_mutex_t	m_time;
 }	t_prg ;
 
 /*Hacemos n filosofos cada uno con idx*/
@@ -44,9 +48,6 @@ typedef struct s_philo
 	int				idx;
 	int				r_fork;
 	int				l_fork;
-	int				start;
-	int				time_now;
-	int				time_dead;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
