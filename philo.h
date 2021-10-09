@@ -17,12 +17,15 @@
 # define GREEN "\033[0;32m"
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
+# define YELLOW "\033[0;33m"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+/* Parametros de ms min 60 ms */
 
 /* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
@@ -35,6 +38,7 @@ typedef struct s_prg
 	int				*forks;
 	int				start;
 	int				now;
+	int				running;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_dead;
 	pthread_mutex_t	m_eat;

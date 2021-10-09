@@ -23,12 +23,16 @@ int	ft_dead_checker(t_philo *ph, int n)
 		{
 			if (!ph[i].alive)
 			{
+				pthread_mutex_lock(&ph->prg->m_dead);
+				ph->prg->running = 0;
 				print_dead(&ph[i]);
+				pthread_mutex_unlock(&ph->prg->m_dead);
 				return (-1);
 			}
 			i++;
 		}
 	}
+	return (0);
 }
 
 void	ft_join_threads(t_philo *ph, int n)

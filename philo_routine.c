@@ -54,19 +54,17 @@ void	*routine(void *tid)
 	ph = (t_philo*)tid;
 	if (ph->idx / 2)
 		usleep(50);
-	while (ph->alive)
+	while (ph->alive || ph->prg->running)
 	{
-		if (!is_he_alive(ph))
+		if (!is_he_alive(ph) || !ph->prg->running)
 			break ;
 		action_eat(ph);
-		if (!is_he_alive(ph))
+		if (!is_he_alive(ph) || !ph->prg->running)
 			break ;
 		action_slp(ph);
-		if (!is_he_alive(ph))
+		if (!is_he_alive(ph) || !ph->prg->running)
 			break ;
 		action_tnk(ph);
 	}
-//	if (!ph.alive)
-//		print_dead(&ph);
 	return (NULL);
 }

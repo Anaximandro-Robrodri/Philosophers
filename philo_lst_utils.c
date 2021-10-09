@@ -28,6 +28,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
 	prg->now = prg->start;
+	prg->running = 1;
 	return(m_f);
 }
 

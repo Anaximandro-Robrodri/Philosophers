@@ -22,7 +22,7 @@ void	print_fork(t_philo *ph)
 void	print_eating(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf(GREEN"(%d) 🍕 Philo %d is eating 🍕\n", get_time_start() - ph->prg->start, ph->idx);
+	printf(YELLOW"(%d) 🍕 Philo %d is eating 🍕\n", get_time_start() - ph->prg->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
@@ -43,6 +43,6 @@ void	print_thinking(t_philo *ph)
 void	print_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf(RED"(%d) ☠️  Philo %d has died ☠️\n", (get_time_start() - ph->prg->now) + ph->prg->die, ph->idx);
+	printf(RED"(%d) ☠️  Philo %d has died ☠️\n", (get_time_start() - ph->prg->start), ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
