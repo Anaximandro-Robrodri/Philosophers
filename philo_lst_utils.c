@@ -27,7 +27,6 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	pthread_mutex_init(&prg->m_eat, NULL);
 	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
-	prg->now = prg->start;
 	prg->running = 1;
 	return(m_f);
 }
@@ -35,6 +34,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 {
 	ph->prg = prg;
+	ph->last_eat = 0;
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
 	ph->l_fork = 0;

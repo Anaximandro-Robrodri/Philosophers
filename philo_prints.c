@@ -43,6 +43,6 @@ void	print_thinking(t_philo *ph)
 void	print_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf(RED"(%d) ☠️  Philo %d has died ☠️\n", (get_time_start() - ph->prg->start), ph->idx);
+	printf(RED"(%d) ☠️  Philo %d has died ☠️\n", (ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }

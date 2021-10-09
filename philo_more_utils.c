@@ -57,16 +57,12 @@ int	get_time_start(void)
 
 int	is_he_alive(t_philo *ph)
 {
-	if (get_time_start() > ph->prg->now + ph->prg->die)
+	if (get_time_start() > ph->last_eat + ph->prg->die)
 	{
 		if (ph->alive == 1)
-		{
 			ph->alive = 0;
-			ph->prg->now = get_time_start();
-		}
 		return (0);
 	}
-	ph->prg->now = get_time_start();
 	return (1);
 }
 

@@ -37,7 +37,6 @@ typedef struct s_prg
 	int				n_eat;
 	int				*forks;
 	int				start;
-	int				now;
 	int				running;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_dead;
@@ -53,6 +52,7 @@ typedef struct s_philo
 	int				thk;
 	int				r_fork;
 	int				l_fork;
+	int				last_eat;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;

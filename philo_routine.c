@@ -23,6 +23,7 @@ static void	action_eat(t_philo *ph)
 			philo_eat(ph, ph->idx - 2, ph->idx - 1);
 		else
 			philo_eat(ph, ph->idx - 1, ph->idx - 2);
+		ph->last_eat = get_time_start();
 	}
 //	pthread_mutex_unlock(&ph->prg->m_eat);
 }
@@ -56,8 +57,6 @@ void	*routine(void *tid)
 		usleep(50);
 	while (ph->alive || ph->prg->running)
 	{
-		if (!is_he_alive(ph) || !ph->prg->running)
-			break ;
 		action_eat(ph);
 		if (!is_he_alive(ph) || !ph->prg->running)
 			break ;
@@ -65,6 +64,8 @@ void	*routine(void *tid)
 		if (!is_he_alive(ph) || !ph->prg->running)
 			break ;
 		action_tnk(ph);
+		if (!is_he_alive(ph) || !ph->prg->running)
+			break ;
 	}
 	return (NULL);
 }
