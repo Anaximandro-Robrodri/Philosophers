@@ -25,6 +25,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
 	pthread_mutex_init(&prg->m_eat, NULL);
+	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
 	prg->now = prg->start;
 	return(m_f);

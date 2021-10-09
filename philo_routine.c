@@ -14,52 +14,59 @@
 
 static void	action_eat(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->prg->m_eat);
+//	pthread_mutex_lock(&ph->prg->m_eat);
 	if (ph->alive)
 	{
 		if (ph->idx == 1)
 			philo_eat(ph, ph->prg->n_philo - 1, 0);
-		else
+		else if (ph->idx % 2)
 			philo_eat(ph, ph->idx - 2, ph->idx - 1);
+		else
+			philo_eat(ph, ph->idx - 1, ph->idx - 2);
 	}
-	pthread_mutex_unlock(&ph->prg->m_eat);
+//	pthread_mutex_unlock(&ph->prg->m_eat);
 }
 
 static void	action_slp(t_philo *ph)
 {
-	if (ph->alive)
+	if (ph->alive && ph->has_eaten)
 	{
 		print_sleeping(ph);
 		usleep(ph->prg->slp * 1000);
+		ph->has_eaten = 0;
+		ph->thk = 0;
 	}
 }
 
 static void	action_tnk(t_philo *ph)
 {
-	if (ph->alive)
+	if (ph->alive && !ph->thk)
+	{
 		print_thinking(ph);
+		ph->thk = 1;
+	}
 }
 
 void	*routine(void *tid)
 {
-	t_philo	ph;
+	t_philo	*ph;
 
-	ph = *(t_philo*)tid;
-	if (ph.idx / 2)
+	ph = (t_philo*)tid;
+	if (ph->idx / 2)
 		usleep(50);
-	while (ph.alive)
+	while (ph->alive)
 	{
-		if (!is_he_alive(&ph))
+		if (!is_he_alive(ph))
 			break ;
-		action_eat(&ph);
-		if (!is_he_alive(&ph))
+		action_eat(ph);
+		if (!is_he_alive(ph))
 			break ;
-		action_slp(&ph);
-		if (!is_he_alive(&ph))
+		action_slp(ph);
+		if (!is_he_alive(ph))
 			break ;
-		action_tnk(&ph);
+		action_tnk(ph);
 	}
-	if (!ph.alive)
-		print_dead(&ph);
+//	if (!ph.alive)
+//		print_dead(&ph);
 	return (NULL);
 }

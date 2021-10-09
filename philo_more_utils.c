@@ -21,7 +21,6 @@ int	ft_dead_checker(t_philo *ph, int n)
 		i = 0;
 		while (i < n)
 		{
-			ph->prg->dead = get_time_start() - ph->prg->now + ph->prg->die;
 			if (!ph[i].alive)
 			{
 				print_dead(&ph[i]);
@@ -91,6 +90,7 @@ void	philo_eat(t_philo *ph, int left, int right)
 		ph->prg->forks[right] = 1;
 		ph->r_fork = 0;
 		ph->l_fork = 0;
+		ph->has_eaten = 1;
 		pthread_mutex_unlock(&ph->m_fork[right]);
 		pthread_mutex_unlock(&ph->m_fork[left]);
 	}
