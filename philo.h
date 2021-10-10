@@ -18,6 +18,11 @@
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
 # define YELLOW "\033[0;33m"
+# define FORK_TAKEN GREEN"(%d) 🍽  Philo %d has taken a fork! 🍽\n"
+# define EATING YELLOW"(%d) 🍕 Philo %d is eating 🍕\n"
+# define SLEEPING CYAN"(%d) 😴 Philo %d is sleeping 😴\n"
+# define THINKING RESET"(%d) 🧠 Philo %d is thinking 🧠\n"
+# define DAMOCLES_SWORD RED"(%d) ☠️  Philo %d has died ☠️\n"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>

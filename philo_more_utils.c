@@ -23,10 +23,8 @@ int	ft_dead_checker(t_philo *ph, int n)
 		{
 			if (!ph[i].alive)
 			{
-				pthread_mutex_lock(&ph->prg->m_dead);
 				ph->prg->running = 0;
 				print_dead(&ph[i]);
-				pthread_mutex_unlock(&ph->prg->m_dead);
 				return (-1);
 			}
 			i++;
@@ -57,12 +55,15 @@ int	get_time_start(void)
 
 int	is_he_alive(t_philo *ph)
 {
+	pthread_mutex_lock(&ph->prg->m_dead);
 	if (get_time_start() > ph->last_eat + ph->prg->die)
 	{
 		if (ph->alive == 1)
 			ph->alive = 0;
+		pthread_mutex_unlock(&ph->prg->m_dead);
 		return (0);
 	}
+	pthread_mutex_unlock(&ph->prg->m_dead);
 	return (1);
 }
 

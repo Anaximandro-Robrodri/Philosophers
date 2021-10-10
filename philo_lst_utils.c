@@ -28,7 +28,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
 	prg->running = 1;
-	return(m_f);
+	return (m_f);
 }
 
 static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
