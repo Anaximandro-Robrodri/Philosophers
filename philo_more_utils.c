@@ -12,6 +12,15 @@
 
 # include "philo.h"
 
+void	ft_usleep(int time)
+{
+	int	timer;
+
+	timer = get_time_start();
+	while ((get_time_start() - timer) < time)
+		usleep(1000);
+}
+
 int	ft_dead_checker(t_philo *ph, int n)
 {
 	int	i;
@@ -58,8 +67,7 @@ int	is_he_alive(t_philo *ph)
 	pthread_mutex_lock(&ph->prg->m_dead);
 	if (get_time_start() > ph->last_eat + ph->prg->die)
 	{
-		if (ph->alive == 1)
-			ph->alive = 0;
+		ph->alive = 0;
 		pthread_mutex_unlock(&ph->prg->m_dead);
 		return (0);
 	}
@@ -86,7 +94,8 @@ void	philo_eat(t_philo *ph, int left, int right)
 	if (ph->r_fork && ph->l_fork)
 	{
 		print_eating(ph);
-		usleep(ph->prg->eat * 1000);
+		ph->last_eat = get_time_start();
+		ft_usleep(ph->prg->eat);
 		ph->prg->forks[left] = 1;
 		ph->prg->forks[right] = 1;
 		ph->r_fork = 0;

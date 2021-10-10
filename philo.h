@@ -78,6 +78,7 @@ int		ft_dead_checker(t_philo *ph, int n);
 int		is_he_alive(t_philo *ph);
 void	ft_join_threads(t_philo *ph, int n);
 void	philo_eat(t_philo *ph, int left, int right);
+void	ft_usleep(int time);
 /* Print messages functions */
 void	print_fork(t_philo *ph);
 void	print_eating(t_philo *ph);
