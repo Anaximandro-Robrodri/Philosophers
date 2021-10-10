@@ -15,7 +15,7 @@
 static void	action_eat(t_philo *ph)
 {
 //	pthread_mutex_lock(&ph->prg->m_dead);
-	if (ph->alive)
+	if (ph->alive && ph->prg->running)
 	{
 		if (ph->idx == 1)
 			philo_eat(ph, ph->prg->n_philo - 1, 0);
@@ -29,9 +29,9 @@ static void	action_eat(t_philo *ph)
 
 static void	action_slp(t_philo *ph)
 {
-	if (ph->alive && ph->has_eaten)
+	if (ph->alive && ph->has_eaten && ph->prg->running)
 	{
-		print_sleeping(ph);
+		print_action(ph, SLEEPING);
 		ft_usleep(ph->prg->slp);
 		ph->has_eaten = 0;
 		ph->thk = 0;
@@ -40,9 +40,9 @@ static void	action_slp(t_philo *ph)
 
 static void	action_tnk(t_philo *ph)
 {
-	if (ph->alive && !ph->thk)
+	if (ph->alive && !ph->thk && ph->prg->running)
 	{
-		print_thinking(ph);
+		print_action(ph, THINKING);
 		ph->thk = 1;
 	}
 }

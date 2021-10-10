@@ -12,35 +12,10 @@
 
 # include "philo.h"
 
-void	print_fork(t_philo *ph)
+void	print_action(t_philo *ph, char *msg)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	if (ph->prg->running == 1)
-		printf(FORK_TAKEN, get_time_start() - ph->prg->start, ph->idx);
-	pthread_mutex_unlock(&ph->prg->m_print);
-}
-
-void	print_eating(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->prg->m_print);
-	if (ph->prg->running == 1)
-		printf(EATING, get_time_start() - ph->prg->start, ph->idx);
-	pthread_mutex_unlock(&ph->prg->m_print);
-}
-
-void	print_sleeping(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->prg->m_print);
-	if (ph->prg->running == 1)
-		printf(SLEEPING, get_time_start() - ph->prg->start, ph->idx);
-	pthread_mutex_unlock(&ph->prg->m_print);
-}
-
-void	print_thinking(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->prg->m_print);
-	if (ph->prg->running == 1)
-		printf(THINKING, get_time_start() - ph->prg->start, ph->idx);
+	printf(msg, get_time_start() - ph->prg->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
@@ -49,4 +24,21 @@ void	print_dead(t_philo *ph)
 	pthread_mutex_lock(&ph->prg->m_print);
 	printf(DAMOCLES_SWORD, (ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
+}
+
+void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg)
+{
+	int	i;
+
+	i = 0;
+	while (i < prg->n_philo)
+	{
+		pthread_mutex_destroy(&m_f[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&prg->m_dead);
+	pthread_mutex_destroy(&prg->m_print);
+	pthread_mutex_destroy(&prg->m_eat);
+	free(prg->forks);
+	free(m_f);
 }

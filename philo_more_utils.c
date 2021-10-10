@@ -79,21 +79,21 @@ void	philo_eat(t_philo *ph, int left, int right)
 {
 	if (ph->prg->forks[right])
 	{
-		print_fork(ph);
+		print_action(ph, FORK_TAKEN);
 		pthread_mutex_lock(&ph->m_fork[right]);
 		ph->prg->forks[right] = 0;
 		ph->r_fork = 1;
 	}
 	if (ph->prg->forks[left])
 	{
-		print_fork(ph);
+		print_action(ph, FORK_TAKEN);
 		pthread_mutex_lock(&ph->m_fork[left]);
 		ph->prg->forks[left] = 0;
 		ph->l_fork = 1;
 	}
 	if (ph->r_fork && ph->l_fork)
 	{
-		print_eating(ph);
+		print_action(ph, EATING);
 		ph->last_eat = get_time_start();
 		ft_usleep(ph->prg->eat);
 		ph->prg->forks[left] = 1;
