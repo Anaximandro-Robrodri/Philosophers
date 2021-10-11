@@ -12,6 +12,23 @@
 
 #include "philo.h"
 
+static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg)
+{
+	int	i;
+
+	i = 0;
+	while (i < prg->n_philo)
+	{
+		pthread_mutex_destroy(&m_f[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&prg->m_dead);
+	pthread_mutex_destroy(&prg->m_print);
+	pthread_mutex_destroy(&prg->m_eat);
+	free(prg->forks);
+	free(m_f);
+}
+
 static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 {
 	int	i;
@@ -63,7 +80,6 @@ void	create_table(t_prg *prg)
 	}
 	if (ft_dead_checker(ph, prg->n_philo) == -1)
 	{
-		ft_join_threads(ph, prg->n_philo);
 		ft_destroy_mutex(m_f, prg);
 		free(ph);
 		return ;

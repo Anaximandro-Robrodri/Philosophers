@@ -79,8 +79,7 @@ int		is_he_alive(t_philo *ph);
 void	ft_join_threads(t_philo *ph, int n);
 void	philo_eat(t_philo *ph, int left, int right);
 void	ft_usleep(int time);
-void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg);
 /* Print messages functions */
-void	print_action(t_philo *ph, char *msg);
+void	print_action(t_philo *ph, char *msg, int time);
 void	print_dead(t_philo *ph);
 #endif

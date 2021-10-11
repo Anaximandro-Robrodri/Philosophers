@@ -31,7 +31,7 @@ static void	action_slp(t_philo *ph)
 {
 	if (ph->alive && ph->has_eaten && ph->prg->running)
 	{
-		print_action(ph, SLEEPING);
+		print_action(ph, SLEEPING, get_time_start() - ph->prg->start);
 		ft_usleep(ph->prg->slp);
 		ph->has_eaten = 0;
 		ph->thk = 0;
@@ -42,7 +42,7 @@ static void	action_tnk(t_philo *ph)
 {
 	if (ph->alive && !ph->thk && ph->prg->running)
 	{
-		print_action(ph, THINKING);
+		print_action(ph, THINKING, get_time_start() - ph->prg->start);
 		ph->thk = 1;
 	}
 }
