@@ -14,9 +14,12 @@
 
 void	print_action(t_philo *ph, char *msg, int time)
 {
-	pthread_mutex_lock(&ph->prg->m_print);
-	printf(msg, time, ph->idx);
-	pthread_mutex_unlock(&ph->prg->m_print);
+	if (ph->prg->running)
+	{
+		pthread_mutex_lock(&ph->prg->m_print);
+		printf(msg, time, ph->idx);
+		pthread_mutex_unlock(&ph->prg->m_print);
+	}
 }
 
 void	print_dead(t_philo *ph)

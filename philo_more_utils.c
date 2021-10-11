@@ -33,6 +33,7 @@ int	ft_dead_checker(t_philo *ph, int n)
 			if (!ph[i].alive)
 			{
 				ph->prg->running = 0;
+			//	print_action(&ph[i], DAMOCLES_SWORD, (ph[i].last_eat + ph[i].prg->die) - ph[i].prg->start);
 				print_dead(&ph[i]);
 				return (-1);
 			}
