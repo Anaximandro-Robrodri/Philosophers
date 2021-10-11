@@ -57,14 +57,14 @@ void	*routine(void *tid)
 	while (ph->alive && ph->prg->running)
 	{
 		action_eat(ph);
-		if (!is_he_alive(ph) || !ph->prg->running)
-			break ;
+//		if (!is_he_alive(ph) || !ph->prg->running)
+//			break ;
 		action_slp(ph);
-		if (!is_he_alive(ph) || !ph->prg->running)
-			break ;
+//		if (!is_he_alive(ph) || !ph->prg->running)
+//			break ;
 		action_tnk(ph);
-		if (!is_he_alive(ph) || !ph->prg->running)
-			break ;
+//		if (!is_he_alive(ph) || !ph->prg->running)
+//			break ;
 	}
 	return (NULL);
 }
