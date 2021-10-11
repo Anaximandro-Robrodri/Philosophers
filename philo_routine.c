@@ -20,9 +20,9 @@ static void	action_eat(t_philo *ph)
 		if (ph->idx == 1)
 			philo_eat(ph, ph->prg->n_philo - 1, 0);
 		else if (ph->idx % 2)
-			philo_eat(ph, ph->idx - 1, ph->idx - 2);
-		else
 			philo_eat(ph, ph->idx - 2, ph->idx - 1);
+		else
+			philo_eat(ph, ph->idx - 1, ph->idx - 2);
 	}
 //	pthread_mutex_unlock(&ph->prg->m_dead);
 }
@@ -52,7 +52,7 @@ void	*routine(void *tid)
 	t_philo	*ph;
 
 	ph = (t_philo*)tid;
-	if (ph->idx / 2)
+	if (ph->idx % 2)
 		usleep(50);
 	while (ph->alive && ph->prg->running)
 	{

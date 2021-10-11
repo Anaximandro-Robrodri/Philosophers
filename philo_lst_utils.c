@@ -54,8 +54,6 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 	ph->last_eat = prg->start;
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
-	ph->l_fork = 0;
-	ph->r_fork = 0;
 	ph->alive = 1;
 }
 

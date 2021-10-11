@@ -55,8 +55,6 @@ typedef struct s_philo
 	int				has_eaten;
 	int				idx;
 	int				thk;
-	int				r_fork;
-	int				l_fork;
 	int				last_eat;
 	t_prg			*prg;
 	pthread_t		t_ph;
