@@ -21,6 +21,24 @@ void	ft_usleep(int time)
 		usleep(1000);
 }
 
+static int	check_philo_full(t_philo *ph, int n)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < n)
+	{
+		if (ph[i].count >= ph[i].prg->n_eat)
+			j++;
+		i++;
+	}
+	if (j == ph->prg->n_philo)
+		return (1);
+	return (0);
+}
+
 int	ft_dead_checker(t_philo *ph, int n)
 {
 	int	i;
@@ -33,26 +51,19 @@ int	ft_dead_checker(t_philo *ph, int n)
 			if (!is_he_alive(&ph[i]))
 			{
 				ph->prg->running = 0;
-			//	print_action(&ph[i], DAMOCLES_SWORD, (ph[i].last_eat + ph[i].prg->die) - ph[i].prg->start);
 				print_dead(&ph[i]);
 				return (-1);
 			}
+			if (ph->prg->n_eat > 0)
+				if (check_philo_full(ph, n))
+				{
+					ph->prg->running = 0;
+					return (-1);
+				}
 			i++;
 		}
 	}
 	return (0);
-}
-
-void	ft_join_threads(t_philo *ph, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		pthread_join(ph[i].t_ph, NULL);
-		i++;
-	}
 }
 
 int	get_time_start(void)
@@ -92,6 +103,8 @@ void	philo_eat(t_philo *ph, int left, int right)
 		ph->prg->forks[left] = 1;
 		ph->prg->forks[right] = 1;
 		ph->has_eaten = 1;
+		if (ph->prg->n_eat > 0)
+			ph->count++;
 		pthread_mutex_unlock(&ph->m_fork[right]);
 		pthread_mutex_unlock(&ph->m_fork[left]);
 	}

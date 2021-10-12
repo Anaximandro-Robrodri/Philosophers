@@ -56,6 +56,7 @@ typedef struct s_philo
 	int				idx;
 	int				thk;
 	int				last_eat;
+	int				count;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
@@ -74,7 +75,6 @@ void	*routine(void *tid);
 int		get_time_start(void);
 int		ft_dead_checker(t_philo *ph, int n);
 int		is_he_alive(t_philo *ph);
-void	ft_join_threads(t_philo *ph, int n);
 void	philo_eat(t_philo *ph, int left, int right);
 void	ft_usleep(int time);
 /* Print messages functions */

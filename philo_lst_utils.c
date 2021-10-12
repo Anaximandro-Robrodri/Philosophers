@@ -12,6 +12,18 @@
 
 #include "philo.h"
 
+static void	ft_join_threads(t_philo *ph, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		pthread_join(ph[i].t_ph, NULL);
+		i++;
+	}
+}
+
 static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg)
 {
 	int	i;
@@ -55,6 +67,7 @@ static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 	ph->idx = i + 1;
 	ph->m_fork = m_f;
 	ph->alive = 1;
+	ph->count = 0;
 }
 
 void	create_table(t_prg *prg)
