@@ -51,7 +51,7 @@ void	*routine(void *tid)
 
 	ph = (t_philo*)tid;
 	if (ph->idx % 2)
-		usleep(50);
+		ft_usleep(50);
 	while (ph->alive && ph->prg->running)
 	{
 		action_eat(ph);
