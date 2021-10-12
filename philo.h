@@ -80,4 +80,5 @@ void	ft_usleep(int time);
 /* Print messages functions */
 void	print_action(t_philo *ph, char *msg, int time);
 void	print_dead(t_philo *ph);
+void	print_success(t_philo *ph);
 #endif

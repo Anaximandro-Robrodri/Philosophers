@@ -12,15 +12,6 @@
 
 # include "philo.h"
 
-void	ft_usleep(int time)
-{
-	int	timer;
-
-	timer = get_time_start();
-	while ((get_time_start() - timer) < time)
-		usleep(1000);
-}
-
 static int	check_philo_full(t_philo *ph, int n)
 {
 	int	i;
@@ -58,6 +49,7 @@ int	ft_dead_checker(t_philo *ph, int n)
 				if (check_philo_full(ph, n))
 				{
 					ph->prg->running = 0;
+					print_success(ph);
 					return (-1);
 				}
 			i++;
