@@ -14,21 +14,18 @@
 
 static void	action_eat(t_philo *ph)
 {
-	if (ph->idx == 1)
-		philo_eat(ph, ph->prg->n_philo - 1, 0);
-	else if (ph->idx % 2)
-		philo_eat(ph, ph->idx - 2, ph->idx - 1);
-	else
+	if (!ph->idx % 2)
 		philo_eat(ph, ph->idx - 1, ph->idx - 2);
+	else if (ph->idx == 1)
+		philo_eat(ph, ph->prg->n_philo - 1, 0);
+	else
+		philo_eat(ph, ph->idx - 2, ph->idx - 1);
 }
 
 static void	action_slp(t_philo *ph)
 {
 	print_action(ph, SLEEPING, get_time_start() - ph->prg->start);
 	ft_usleep(ph->prg->slp);
-	pthread_mutex_lock(&ph->prg->m_dead);
-	usleep(100);
-	pthread_mutex_unlock(&ph->prg->m_dead);
 }
 
 void	*routine(void *tid)
@@ -41,6 +38,8 @@ void	*routine(void *tid)
 		print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
 		ft_usleep(ph->prg->die);
 	}
+	if (ph->idx % 2)
+		usleep(100);
 	while (ph->alive && ph->prg->running)
 	{
 		action_eat(ph);
