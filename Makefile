@@ -23,7 +23,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
 
 HEADER = philo.h
 

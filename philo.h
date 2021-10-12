@@ -47,13 +47,11 @@ typedef struct s_prg
 	pthread_mutex_t	m_dead;
 }	t_prg ;
 
-/*Hacemos n filosofos cada uno con idx*/
+/* Hacemos n filosofos cada uno con idx*/
 typedef struct s_philo
 {
 	int				alive;
-	int				has_eaten;
 	int				idx;
-	int				thk;
 	int				last_eat;
 	int				count;
 	t_prg			*prg;

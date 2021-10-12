@@ -94,7 +94,6 @@ void	philo_eat(t_philo *ph, int left, int right)
 		ft_usleep(ph->prg->eat);
 		ph->prg->forks[left] = 1;
 		ph->prg->forks[right] = 1;
-		ph->has_eaten = 1;
 		if (ph->prg->n_eat > 0)
 			ph->count++;
 		pthread_mutex_unlock(&ph->m_fork[right]);
