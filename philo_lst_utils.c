@@ -36,7 +36,6 @@ static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg)
 	}
 	pthread_mutex_destroy(&prg->m_dead);
 	pthread_mutex_destroy(&prg->m_print);
-	pthread_mutex_destroy(&prg->m_eat);
 	free(prg->forks);
 	free(m_f);
 }
@@ -53,7 +52,6 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 		i++;
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
-	pthread_mutex_init(&prg->m_eat, NULL);
 	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
 	prg->running = 1;

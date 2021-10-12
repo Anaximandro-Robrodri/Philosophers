@@ -50,8 +50,13 @@ void	*routine(void *tid)
 	t_philo	*ph;
 
 	ph = (t_philo*)tid;
-	if (ph->idx % 2)
-		ft_usleep(50);
+	if (ph->prg->n_philo == 1)
+	{
+		print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
+		ft_usleep(ph->prg->die);
+	}
+//	if (ph->idx % 2)
+//		ft_usleep(1);
 	while (ph->alive && ph->prg->running)
 	{
 		action_eat(ph);

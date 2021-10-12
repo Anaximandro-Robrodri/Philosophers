@@ -28,7 +28,7 @@ void	ft_error(void)
 static void	store_args(int argc, char **argv, t_prg *prg)
 {
 	prg->n_philo = ft_atoi(argv[1]);
-	if (prg->n_philo > MAX_PHILO || prg->n_philo < 2)
+	if (prg->n_philo > MAX_PHILO)
 		ft_error ();
 	prg->die = ft_atoi(argv[2]);
 	prg->eat = ft_atoi(argv[3]);

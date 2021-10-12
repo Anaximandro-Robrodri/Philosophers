@@ -45,7 +45,6 @@ typedef struct s_prg
 	int				running;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_dead;
-	pthread_mutex_t	m_eat;
 }	t_prg ;
 
 /*Hacemos n filosofos cada uno con idx*/
