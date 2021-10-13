@@ -41,8 +41,9 @@ void	ft_dead_checker(t_philo *ph, int n)
 		{
 			if (!is_he_alive(&ph[i]))
 			{
+				print_action(&ph[i], DAMOCLES_SWORD,
+					(ph[i].last_eat + ph[i].prg->die) - ph[i].prg->start);
 				ph->prg->running = 0;
-				print_dead(&ph[i]);
 				return ;
 			}
 			if (ph->prg->n_eat > 0)
@@ -50,7 +51,6 @@ void	ft_dead_checker(t_philo *ph, int n)
 				if (check_philo_full(ph, n))
 				{
 					ph->prg->running = 0;
-					print_success(ph);
 					return ;
 				}
 			}
@@ -69,14 +69,11 @@ uint64_t	get_time_start(void)
 
 int	is_he_alive(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->prg->m_dead);
 	if (get_time_start() > ph->last_eat + ph->prg->die)
 	{
 		ph->alive = 0;
-		pthread_mutex_unlock(&ph->prg->m_dead);
 		return (0);
 	}
-	pthread_mutex_unlock(&ph->prg->m_dead);
 	return (1);
 }
 

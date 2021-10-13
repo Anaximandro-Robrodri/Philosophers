@@ -13,11 +13,11 @@
 NAME = philo
 
 SRC =	philo.c \
-		philo_utils.c \
-		philo_lst_utils.c \
+		philo_init_table.c \
 		philo_routine.c \
-		philo_prints.c \
-		philo_more_utils.c
+		philo_utils.c \
+		philo_utils_2.c \
+		philo_utils_3.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -40,7 +40,7 @@ void	*routine(void *tid)
 	}
 	if (ph->idx % 2)
 		usleep(100);
-	while (ph->alive && ph->prg->running)
+	while (ph->prg->running)
 	{
 		action_eat(ph);
 		action_slp(ph);
