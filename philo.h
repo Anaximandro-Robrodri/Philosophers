@@ -18,64 +18,57 @@
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
 # define YELLOW "\033[0;33m"
-# define FORK_TAKEN GREEN"(%d) 🍽  Philo %d has taken a fork! 🍽\n"
-# define EATING YELLOW"(%d) 🍕 Philo %d is eating 🍕\n"
-# define SLEEPING CYAN"(%d) 😴 Philo %d is sleeping 😴\n"
-# define THINKING RESET"(%d) 🧠 Philo %d is thinking 🧠\n"
-# define DAMOCLES_SWORD RED"(%d) ☠️  Philo %d has died ☠️\n"
+# define FORK_TAKEN GREEN"(%llu) 🍽  Philo %d has taken a fork! 🍽\n"
+# define EATING YELLOW"(%llu) 🍕 Philo %d is eating 🍕\n"
+# define SLEEPING CYAN"(%llu) 😴 Philo %d is sleeping 😴\n"
+# define THINKING RESET"(%llu) 🧠 Philo %d is thinking 🧠\n"
+# define DAMOCLES_SWORD RED"(%llu) ☠️  Philo %d has died ☠️\n"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
-/* Parametros de ms min 60 ms */
-
-/* En este guardamos los datos comunes a cada filosofo*/
 typedef struct s_prg
 {
 	int				n_philo;
-	int				die;
-	int				eat;
-	int				slp;
-	int				n_eat;
+	uint64_t		die;
+	uint64_t		eat;
+	uint64_t		slp;
+	uint64_t		n_eat;
 	int				*forks;
-	int				start;
-	int				running;
+	uint64_t		start;
+	bool			running;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_dead;
 }	t_prg ;
 
-/* Hacemos n filosofos cada uno con idx*/
 typedef struct s_philo
 {
-	int				alive;
+	bool			alive;
 	int				idx;
-	int				last_eat;
-	int				count;
+	uint64_t		last_eat;
+	uint64_t		count;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	*m_fork;
 }	t_philo ;
 
-/* Just parsing and stuff */
-void	ft_error(void);
-int		ft_is_space(char a);
-int		ft_is_sign(char a);
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-int		ft_error_control(int i, char **argv);
-/* Important functions for philos */
-void	create_table(t_prg *prg);
-void	*routine(void *tid);
-int		get_time_start(void);
-int		ft_dead_checker(t_philo *ph, int n);
-int		is_he_alive(t_philo *ph);
-void	philo_eat(t_philo *ph, int left, int right);
-void	ft_usleep(int time);
-/* Print messages functions */
-void	print_action(t_philo *ph, char *msg, int time);
-void	print_dead(t_philo *ph);
-void	print_success(t_philo *ph);
+int			ft_is_space(char a);
+int			ft_is_sign(char a);
+int			ft_isdigit(int c);
+int			ft_atoi(const char *str);
+int			ft_error_control(int i, char **argv);
+void		create_table(t_prg *prg);
+void		*routine(void *tid);
+uint64_t	get_time_start(void);
+void		ft_dead_checker(t_philo *ph, int n);
+int			is_he_alive(t_philo *ph);
+void		philo_eat(t_philo *ph, int left, int right);
+void		ft_usleep(uint64_t time);
+void		print_action(t_philo *ph, char *msg, uint64_t time);
+void		print_dead(t_philo *ph);
+void		print_success(t_philo *ph);
 #endif

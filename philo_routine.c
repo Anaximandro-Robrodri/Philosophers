@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 static void	action_eat(t_philo *ph)
 {
@@ -32,7 +32,7 @@ void	*routine(void *tid)
 {
 	t_philo	*ph;
 
-	ph = (t_philo*)tid;
+	ph = (t_philo *)tid;
 	if (ph->prg->n_philo == 1)
 	{
 		print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);

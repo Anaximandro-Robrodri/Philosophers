@@ -87,11 +87,9 @@ void	create_table(t_prg *prg)
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
 	}
-	if (ft_dead_checker(ph, prg->n_philo) == -1)
-	{
-		ft_join_threads(ph, prg->n_philo);
-		ft_destroy_mutex(m_f, prg);
-		free(ph);
-		return ;
-	}
+	ft_dead_checker(ph, prg->n_philo);
+	ft_join_threads(ph, prg->n_philo);
+	ft_destroy_mutex(m_f, prg);
+	free(ph);
+	return ;
 }

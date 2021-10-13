@@ -16,20 +16,13 @@ static void	print_instructions(void)
 {
 	printf("Insert arguments like this: \n");
 	printf("[Number of philoshopers] , [Time to die], [Time to eat] \n");
-	printf("[Time to sleep] , (OPTIONAL) [Number of times each philosopher must eat] \n");
+	printf("[Time to sleep] , (OPTIONAL)");
+	printf("[Number of times each philosopher must eat] \n");
 }
 
-void	ft_error(void)
-{
-	printf("An error has ocurred\n");
-	exit (-1);
-}
-
-static void	store_args(int argc, char **argv, t_prg *prg)
+static int	store_args(int argc, char **argv, t_prg *prg)
 {
 	prg->n_philo = ft_atoi(argv[1]);
-	if (prg->n_philo > MAX_PHILO)
-		ft_error ();
 	prg->die = ft_atoi(argv[2]);
 	prg->eat = ft_atoi(argv[3]);
 	prg->slp = ft_atoi(argv[4]);
@@ -37,8 +30,13 @@ static void	store_args(int argc, char **argv, t_prg *prg)
 		prg->n_eat = ft_atoi(argv[5]);
 	else
 		prg->n_eat = -1;
-	if (!prg->die || !prg->eat || !prg->slp || !prg->n_eat)
-		ft_error();
+	if (!prg->die || !prg->eat || !prg->slp || !prg->n_eat
+		|| prg->n_philo > MAX_PHILO || !prg->n_philo)
+	{
+		printf("An error has ocurred\n");
+		return (0);
+	}
+	return (1);
 }
 
 static int	check_args(int argc, char **argv)
@@ -59,11 +57,12 @@ int	main(int argc, char **argv)
 	{
 		if (check_args(argc, argv))
 		{
-			store_args(argc, argv, &prg);
-		 	create_table(&prg);
+			if (!store_args(argc, argv, &prg))
+				return (0);
+			create_table(&prg);
 		}
 		else
-			ft_error ();
+			printf("An error has ocurred\n");
 	}
 	else
 		print_instructions();

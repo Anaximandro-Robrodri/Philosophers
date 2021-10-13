@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 static int	check_philo_full(t_philo *ph, int n)
 {
@@ -30,7 +30,7 @@ static int	check_philo_full(t_philo *ph, int n)
 	return (0);
 }
 
-int	ft_dead_checker(t_philo *ph, int n)
+void	ft_dead_checker(t_philo *ph, int n)
 {
 	int	i;
 
@@ -43,27 +43,28 @@ int	ft_dead_checker(t_philo *ph, int n)
 			{
 				ph->prg->running = 0;
 				print_dead(&ph[i]);
-				return (-1);
+				return ;
 			}
 			if (ph->prg->n_eat > 0)
+			{
 				if (check_philo_full(ph, n))
 				{
 					ph->prg->running = 0;
 					print_success(ph);
-					return (-1);
+					return ;
 				}
+			}
 			i++;
 		}
 	}
-	return (0);
 }
 
-int	get_time_start(void)
+uint64_t	get_time_start(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	return ((uint64_t)(time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	is_he_alive(t_philo *ph)

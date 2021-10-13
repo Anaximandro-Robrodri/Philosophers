@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
-void	print_action(t_philo *ph, char *msg, int time)
+void	print_action(t_philo *ph, char *msg, uint64_t time)
 {
 	if (ph->prg->running)
 	{
@@ -25,7 +25,8 @@ void	print_action(t_philo *ph, char *msg, int time)
 void	print_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
-	printf(DAMOCLES_SWORD, (ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
+	printf(DAMOCLES_SWORD,
+		(ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
@@ -36,11 +37,11 @@ void	print_success(t_philo *ph)
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
-void	ft_usleep(int time)
+void	ft_usleep(uint64_t time)
 {
-	int	timer;
+	uint64_t	timer;
 
 	timer = get_time_start();
 	while ((get_time_start() - timer) < time)
-		usleep(1);
+		;
 }
