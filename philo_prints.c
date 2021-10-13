@@ -42,5 +42,5 @@ void	ft_usleep(int time)
 
 	timer = get_time_start();
 	while ((get_time_start() - timer) < time)
-		usleep(1000);
+		usleep(1);
 }
