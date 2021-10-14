@@ -42,9 +42,10 @@ void	ft_dead_checker(t_philo *ph, int n)
 			if (!is_he_alive(&ph[i]))
 			{
 				pthread_mutex_lock(&ph[i].m_dead);
-				print_action(&ph[i], DAMOCLES_SWORD,
-					(get_time_start() - ph[i].prg->start));
+//				print_action(&ph[i], DAMOCLES_SWORD,
+//					(get_time_start() - ph[i].prg->start));
 				ph->prg->running = 0;
+				print_dead(&ph[i]);
 				pthread_mutex_unlock(&ph[i].m_dead);
 				return ;
 			}
@@ -61,12 +62,12 @@ void	ft_dead_checker(t_philo *ph, int n)
 	}
 }
 
-uint64_t	get_time_start(void)
+u_int64_t	get_time_start(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((uint64_t)(time.tv_sec * 1000) + (time.tv_usec / 1000));
+	return ((u_int64_t)(time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	is_he_alive(t_philo *ph)

@@ -12,21 +12,28 @@
 
 #include "philo.h"
 
-void	print_action(t_philo *ph, char *msg, uint64_t time)
+void	print_action(t_philo *ph, char *msg, u_int64_t time)
 {
+	pthread_mutex_lock(&ph->prg->m_print);
 	if (ph->prg->running)
 	{
-		pthread_mutex_lock(&ph->prg->m_print);
 		printf(msg, time, ph->idx);
-		pthread_mutex_unlock(&ph->prg->m_print);
 	}
+	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
-void	ft_usleep(uint64_t time)
+void	ft_usleep(u_int64_t time)
 {
-	uint64_t	timer;
+	u_int64_t	timer;
 
 	timer = get_time_start();
 	while ((get_time_start() - timer) < time)
 		;
+}
+
+void	print_dead(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->prg->m_print);
+	printf(DAMOCLES_SWORD, (ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
+	pthread_mutex_unlock(&ph->prg->m_print);
 }
