@@ -42,7 +42,6 @@ typedef struct s_prg
 	uint64_t		start;
 	bool			running;
 	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_dead;
 }	t_prg ;
 
 typedef struct s_philo
@@ -53,6 +52,7 @@ typedef struct s_philo
 	uint64_t		count;
 	t_prg			*prg;
 	pthread_t		t_ph;
+	pthread_mutex_t	m_dead;
 	pthread_mutex_t	*m_fork;
 }	t_philo ;
 

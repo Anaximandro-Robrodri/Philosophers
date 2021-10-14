@@ -6,7 +6,7 @@
 #    By: robrodri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 16:17:40 by robrodri          #+#    #+#              #
-#    Updated: 2021/09/15 17:00:40 by robrodri         ###   ########.fr        #
+#    Updated: 2021/10/14 15:24:00 by robrodri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
 
 HEADER = philo.h
 
@@ -31,8 +31,8 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 		$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lpthread
-$(OBJS): $(SRC)
-	$(CC) $(FLAGS) -c $(SRC)
+#$(OBJS): $(SRC)
+#	$(CC) $(FLAGS) -c $(SRC)
 
 clean :
 		rm -rf $(OBJS);

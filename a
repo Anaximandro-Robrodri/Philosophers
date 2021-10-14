@@ -1,0 +1,176 @@
+[0;32m(0) 🍽  Philo 2 has taken a fork! 🍽
+[0;32m(0) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(0) 🍕 Philo 2 is eating 🍕
+[0;32m(0) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(0) 🍽  Philo 6 has taken a fork! 🍽
+[0;32m(0) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(0) 🍕 Philo 6 is eating 🍕
+[0;32m(0) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(0) 🍕 Philo 4 is eating 🍕
+[0;36m(100) 😴 Philo 2 is sleeping 😴
+[0;32m(100) 🍽  Philo 1 has taken a fork! 🍽
+[0;32m(100) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(100) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(100) 🍕 Philo 1 is eating 🍕
+[0;32m(100) 🍽  Philo 3 has taken a fork! 🍽
+[0;33m(100) 🍕 Philo 3 is eating 🍕
+[0;36m(100) 😴 Philo 6 is sleeping 😴
+[0;36m(100) 😴 Philo 4 is sleeping 😴
+[0;32m(100) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(107) 🍽  Philo 5 has taken a fork! 🍽
+[0;33m(107) 🍕 Philo 5 is eating 🍕
+[0m(200) 🧠 Philo 6 is thinking 🧠
+[0m(200) 🧠 Philo 4 is thinking 🧠
+[0m(200) 🧠 Philo 2 is thinking 🧠
+[0;32m(200) 🍽  Philo 2 has taken a fork! 🍽
+[0;32m(200) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(200) 🍕 Philo 2 is eating 🍕
+[0;36m(200) 😴 Philo 1 is sleeping 😴
+[0;36m(200) 😴 Philo 3 is sleeping 😴
+[0;32m(200) 🍽  Philo 6 has taken a fork! 🍽
+[0;36m(207) 😴 Philo 5 is sleeping 😴
+[0;32m(207) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(207) 🍕 Philo 6 is eating 🍕
+[0;32m(207) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(207) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(207) 🍕 Philo 4 is eating 🍕
+[0m(300) 🧠 Philo 1 is thinking 🧠
+[0m(300) 🧠 Philo 3 is thinking 🧠
+[0;36m(300) 😴 Philo 2 is sleeping 😴
+[0;32m(300) 🍽  Philo 1 has taken a fork! 🍽
+[0m(307) 🧠 Philo 5 is thinking 🧠
+[0;36m(307) 😴 Philo 4 is sleeping 😴
+[0;36m(307) 😴 Philo 6 is sleeping 😴
+[0;32m(307) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(307) 🍽  Philo 3 has taken a fork! 🍽
+[0;33m(307) 🍕 Philo 3 is eating 🍕
+[0;32m(307) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(307) 🍕 Philo 1 is eating 🍕
+[0;32m(310) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(310) 🍽  Philo 5 has taken a fork! 🍽
+[0;33m(310) 🍕 Philo 5 is eating 🍕
+[0m(400) 🧠 Philo 2 is thinking 🧠
+[0m(407) 🧠 Philo 6 is thinking 🧠
+[0;36m(407) 😴 Philo 3 is sleeping 😴
+[0;32m(407) 🍽  Philo 6 has taken a fork! 🍽
+[0;36m(407) 😴 Philo 1 is sleeping 😴
+[0m(407) 🧠 Philo 4 is thinking 🧠
+[0;32m(407) 🍽  Philo 2 has taken a fork! 🍽
+[0;32m(407) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(407) 🍕 Philo 2 is eating 🍕
+[0;36m(410) 😴 Philo 5 is sleeping 😴
+[0;32m(410) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(410) 🍕 Philo 6 is eating 🍕
+[0;32m(410) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(410) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(410) 🍕 Philo 4 is eating 🍕
+[0m(507) 🧠 Philo 3 is thinking 🧠
+[0;36m(507) 😴 Philo 2 is sleeping 😴
+[0m(507) 🧠 Philo 1 is thinking 🧠
+[0;32m(507) 🍽  Philo 1 has taken a fork! 🍽
+[0m(510) 🧠 Philo 5 is thinking 🧠
+[0;36m(510) 😴 Philo 4 is sleeping 😴
+[0;36m(510) 😴 Philo 6 is sleeping 😴
+[0;32m(510) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(510) 🍽  Philo 3 has taken a fork! 🍽
+[0;33m(510) 🍕 Philo 3 is eating 🍕
+[0;32m(510) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(510) 🍽  Philo 5 has taken a fork! 🍽
+[0;33m(510) 🍕 Philo 5 is eating 🍕
+[0;32m(510) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(510) 🍕 Philo 1 is eating 🍕
+[0m(607) 🧠 Philo 2 is thinking 🧠
+[0m(610) 🧠 Philo 4 is thinking 🧠
+[0;36m(610) 😴 Philo 3 is sleeping 😴
+[0;36m(610) 😴 Philo 1 is sleeping 😴
+[0;36m(610) 😴 Philo 5 is sleeping 😴
+[0m(610) 🧠 Philo 6 is thinking 🧠
+[0;32m(610) 🍽  Philo 6 has taken a fork! 🍽
+[0;32m(610) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(610) 🍕 Philo 6 is eating 🍕
+[0;32m(610) 🍽  Philo 2 has taken a fork! 🍽
+[0;32m(610) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(610) 🍕 Philo 2 is eating 🍕
+[0;32m(610) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(610) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(610) 🍕 Philo 4 is eating 🍕
+[0m(710) 🧠 Philo 3 is thinking 🧠
+[0m(710) 🧠 Philo 5 is thinking 🧠
+[0;32m(710) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(710) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(710) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(710) 🍽  Philo 5 has taken a fork! 🍽
+[0;36m(710) 😴 Philo 6 is sleeping 😴
+[0;33m(710) 🍕 Philo 5 is eating 🍕
+[0m(710) 🧠 Philo 1 is thinking 🧠
+[0;33m(710) 🍕 Philo 3 is eating 🍕
+[0;36m(710) 😴 Philo 2 is sleeping 😴
+[0;36m(710) 😴 Philo 4 is sleeping 😴
+[0;32m(710) 🍽  Philo 1 has taken a fork! 🍽
+[0;32m(713) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(713) 🍕 Philo 1 is eating 🍕
+[0m(810) 🧠 Philo 4 is thinking 🧠
+[0m(810) 🧠 Philo 6 is thinking 🧠
+[0;32m(810) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(810) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(810) 🍕 Philo 4 is eating 🍕
+[0;36m(810) 😴 Philo 3 is sleeping 😴
+[0;36m(810) 😴 Philo 5 is sleeping 😴
+[0m(810) 🧠 Philo 2 is thinking 🧠
+[0;32m(810) 🍽  Philo 2 has taken a fork! 🍽
+[0;36m(813) 😴 Philo 1 is sleeping 😴
+[0;32m(813) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(813) 🍕 Philo 2 is eating 🍕
+[0;32m(814) 🍽  Philo 6 has taken a fork! 🍽
+[0;32m(814) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(814) 🍕 Philo 6 is eating 🍕
+[0m(910) 🧠 Philo 3 is thinking 🧠
+[0;32m(910) 🍽  Philo 3 has taken a fork! 🍽
+[0m(910) 🧠 Philo 5 is thinking 🧠
+[0;36m(910) 😴 Philo 4 is sleeping 😴
+[0m(913) 🧠 Philo 1 is thinking 🧠
+[0;36m(913) 😴 Philo 2 is sleeping 😴
+[0;32m(913) 🍽  Philo 1 has taken a fork! 🍽
+[0;32m(913) 🍽  Philo 3 has taken a fork! 🍽
+[0;33m(913) 🍕 Philo 3 is eating 🍕
+[0;36m(914) 😴 Philo 6 is sleeping 😴
+[0;32m(914) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(914) 🍕 Philo 1 is eating 🍕
+[0;32m(914) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(914) 🍽  Philo 5 has taken a fork! 🍽
+[0;33m(914) 🍕 Philo 5 is eating 🍕
+[0m(1010) 🧠 Philo 4 is thinking 🧠
+[0m(1013) 🧠 Philo 2 is thinking 🧠
+[0;32m(1013) 🍽  Philo 2 has taken a fork! 🍽
+[0;36m(1013) 😴 Philo 3 is sleeping 😴
+[0m(1014) 🧠 Philo 6 is thinking 🧠
+[0;36m(1014) 😴 Philo 5 is sleeping 😴
+[0;36m(1014) 😴 Philo 1 is sleeping 😴
+[0;32m(1014) 🍽  Philo 4 has taken a fork! 🍽
+[0;32m(1014) 🍽  Philo 4 has taken a fork! 🍽
+[0;33m(1014) 🍕 Philo 4 is eating 🍕
+[0;32m(1014) 🍽  Philo 6 has taken a fork! 🍽
+[0;32m(1014) 🍽  Philo 6 has taken a fork! 🍽
+[0;33m(1014) 🍕 Philo 6 is eating 🍕
+[0;32m(1014) 🍽  Philo 2 has taken a fork! 🍽
+[0;33m(1014) 🍕 Philo 2 is eating 🍕
+[0m(1113) 🧠 Philo 3 is thinking 🧠
+[0m(1114) 🧠 Philo 5 is thinking 🧠
+[0;36m(1114) 😴 Philo 4 is sleeping 😴
+[0;32m(1114) 🍽  Philo 3 has taken a fork! 🍽
+[0;32m(1114) 🍽  Philo 5 has taken a fork! 🍽
+[0;32m(1114) 🍽  Philo 5 has taken a fork! 🍽
+[0;33m(1114) 🍕 Philo 5 is eating 🍕
+[0;32m(1114) 🍽  Philo 3 has taken a fork! 🍽
+[0;33m(1114) 🍕 Philo 3 is eating 🍕
+[0;36m(1114) 😴 Philo 6 is sleeping 😴
+[0;36m(1114) 😴 Philo 2 is sleeping 😴
+[0m(1114) 🧠 Philo 1 is thinking 🧠
+[0;32m(1114) 🍽  Philo 1 has taken a fork! 🍽
+[0;32m(1114) 🍽  Philo 1 has taken a fork! 🍽
+[0;33m(1114) 🍕 Philo 1 is eating 🍕
+[0m(1214) 🧠 Philo 2 is thinking 🧠
+[0;36m(1214) 😴 Philo 1 is sleeping 😴
+[0m(1214) 🧠 Philo 4 is thinking 🧠
+[0;36m(1214) 😴 Philo 5 is sleeping 😴
+[0;36m(1214) 😴 Philo 3 is sleeping 😴

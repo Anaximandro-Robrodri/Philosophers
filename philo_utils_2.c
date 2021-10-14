@@ -41,9 +41,11 @@ void	ft_dead_checker(t_philo *ph, int n)
 		{
 			if (!is_he_alive(&ph[i]))
 			{
+				pthread_mutex_lock(&ph[i].m_dead);
 				print_action(&ph[i], DAMOCLES_SWORD,
-					(ph[i].last_eat + ph[i].prg->die) - ph[i].prg->start);
+					(get_time_start() - ph[i].prg->start));
 				ph->prg->running = 0;
+				pthread_mutex_unlock(&ph[i].m_dead);
 				return ;
 			}
 			if (ph->prg->n_eat > 0)
@@ -85,6 +87,7 @@ void	philo_eat(t_philo *ph, int left, int right)
 	pthread_mutex_lock(&ph->m_fork[left]);
 	print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
 	ph->prg->forks[left] = 0;
+	pthread_mutex_lock(&ph->m_dead);
 	if (!ph->prg->forks[right] && !ph->prg->forks[left])
 	{
 		ph->last_eat = get_time_start();
@@ -97,4 +100,5 @@ void	philo_eat(t_philo *ph, int left, int right)
 		pthread_mutex_unlock(&ph->m_fork[right]);
 		pthread_mutex_unlock(&ph->m_fork[left]);
 	}
+	pthread_mutex_unlock(&ph->m_dead);
 }

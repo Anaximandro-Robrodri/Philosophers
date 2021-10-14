@@ -34,7 +34,7 @@ static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg)
 		pthread_mutex_destroy(&m_f[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&prg->m_dead);
+//	pthread_mutex_destroy(&prg->m_dead);
 	pthread_mutex_destroy(&prg->m_print);
 	free(prg->forks);
 	free(m_f);
@@ -52,7 +52,6 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 		i++;
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
-	pthread_mutex_init(&prg->m_dead, NULL);
 	prg->start = get_time_start();
 	prg->running = 1;
 	return (m_f);
@@ -60,6 +59,7 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 
 static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 {
+	pthread_mutex_init(&ph->m_dead, NULL);
 	ph->prg = prg;
 	ph->last_eat = prg->start;
 	ph->idx = i + 1;

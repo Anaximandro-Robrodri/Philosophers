@@ -37,6 +37,7 @@ void	*routine(void *tid)
 	{
 		print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
 		ft_usleep(ph->prg->die);
+		return (NULL);
 	}
 	if (ph->idx % 2)
 		usleep(100);
