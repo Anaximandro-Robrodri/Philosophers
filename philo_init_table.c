@@ -85,7 +85,7 @@ void	create_table(t_prg *prg)
 	{
 		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-		i+=2;
+		i++;
 	}
 	ft_dead_checker(ph, prg->n_philo);
 	ft_join_threads(ph, prg->n_philo);
