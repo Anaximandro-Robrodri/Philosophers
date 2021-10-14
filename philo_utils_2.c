@@ -42,10 +42,9 @@ void	ft_dead_checker(t_philo *ph, int n)
 			if (!is_he_alive(&ph[i]))
 			{
 				pthread_mutex_lock(&ph[i].m_dead);
-//				print_action(&ph[i], DAMOCLES_SWORD,
-//					(get_time_start() - ph[i].prg->start));
+				print_action(&ph[i], DAMOCLES_SWORD,
+					(get_time_start() - ph[i].prg->start));
 				ph->prg->running = 0;
-				print_dead(&ph[i]);
 				pthread_mutex_unlock(&ph[i].m_dead);
 				return ;
 			}

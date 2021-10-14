@@ -68,5 +68,4 @@ int			is_he_alive(t_philo *ph);
 void		philo_eat(t_philo *ph, int left, int right);
 void		ft_usleep(u_int64_t time);
 void		print_action(t_philo *ph, char *msg, u_int64_t time);
-void		print_dead(t_philo *ph);
 #endif

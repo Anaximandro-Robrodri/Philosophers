@@ -16,9 +16,7 @@ void	print_action(t_philo *ph, char *msg, u_int64_t time)
 {
 	pthread_mutex_lock(&ph->prg->m_print);
 	if (ph->prg->running)
-	{
 		printf(msg, time, ph->idx);
-	}
 	pthread_mutex_unlock(&ph->prg->m_print);
 }
 
@@ -29,11 +27,4 @@ void	ft_usleep(u_int64_t time)
 	timer = get_time_start();
 	while ((get_time_start() - timer) < time)
 		;
-}
-
-void	print_dead(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->prg->m_print);
-	printf(DAMOCLES_SWORD, (ph->last_eat + ph->prg->die) - ph->prg->start, ph->idx);
-	pthread_mutex_unlock(&ph->prg->m_print);
 }
