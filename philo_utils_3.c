@@ -26,5 +26,5 @@ void	ft_usleep(u_int64_t time)
 
 	timer = get_time_start();
 	while ((get_time_start() - timer) < time)
-		;
+		usleep(1);
 }

@@ -40,7 +40,7 @@ void	*routine(void *tid)
 		return (NULL);
 	}
 	if (ph->idx % 2)
-		usleep(100);
+		ft_usleep(100);
 	while (ph->prg->running)
 	{
 		action_eat(ph);
