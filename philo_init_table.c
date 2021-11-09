@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static void	ft_join_threads(t_philo *ph, int n)
+/*static void	ft_join_threads(t_philo *ph, int n)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ static void	ft_join_threads(t_philo *ph, int n)
 		pthread_join(ph[i].t_ph, NULL);
 		i++;
 	}
-}
+}*/
 
 static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg, t_philo *ph)
 {
@@ -99,10 +99,19 @@ void	create_table(t_prg *prg)
 	{
 		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-		i++;
+		i+=2;
+		usleep(100);
+	}
+	i = 1;
+	while (i < prg->n_philo)
+	{
+		init_philos(&ph[i], prg, i, m_f);
+		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
+		i+=2;
+		usleep(100);
 	}
 	ft_dead_checker(ph, prg->n_philo);
-	ft_join_threads(ph, prg->n_philo);
+//	ft_join_threads(ph, prg->n_philo);
 	ft_destroy_mutex(m_f, prg, ph);
 	free(ph);
 	return ;

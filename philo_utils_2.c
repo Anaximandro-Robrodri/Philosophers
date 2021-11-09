@@ -42,6 +42,7 @@ void	ft_dead_checker(t_philo *ph, int n)
 			if (!is_he_alive(&ph[i]))
 			{
 				end_program(&ph[i]);
+				pthread_detach(ph[i].t_ph);
 				return ;
 			}
 			if (ph->prg->n_eat > 0)

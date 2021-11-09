@@ -15,6 +15,9 @@
 void	print_action(t_philo *ph, char *msg)
 {
 	u_int64_t time;
+
+	if (!ph->prg->running)
+		return;
 	pthread_mutex_lock(&ph->prg->m_print);
 	time = get_time_start() - ph->prg->start;
 	if (ph->prg->running)
