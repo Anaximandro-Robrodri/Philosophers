@@ -53,6 +53,7 @@ void	ft_dead_checker(t_philo *ph, int n)
 				}
 			}
 			i++;
+			usleep(1000);
 		}
 	}
 }
