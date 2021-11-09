@@ -28,3 +28,12 @@ void	ft_usleep(u_int64_t time)
 	while ((get_time_start() - timer) < time)
 		usleep(1);
 }
+
+void	end_program(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->m_dead);
+	print_action(ph, DAMOCLES_SWORD,
+		(get_time_start() - ph->prg->start));
+	ph->prg->running = 0;
+	pthread_mutex_unlock(&ph->m_dead);
+}

@@ -13,16 +13,11 @@
 #ifndef PHILO_H
 # define PHILO_H
 # define MAX_PHILO 200
-# define RED "\033[0;31m"
-# define GREEN "\033[0;32m"
-# define CYAN "\033[0;36m"
-# define RESET "\033[0m"
-# define YELLOW "\033[0;33m"
-# define FORK_TAKEN GREEN"(%llu) 🍽  Philo %d has taken a fork! 🍽\n"
-# define EATING YELLOW"(%llu) 🍕 Philo %d is eating 🍕\n"
-# define SLEEPING CYAN"(%llu) 😴 Philo %d is sleeping 😴\n"
-# define THINKING RESET"(%llu) 🧠 Philo %d is thinking 🧠\n"
-# define DAMOCLES_SWORD RED"(%lu) ☠️  Philo %d has died ☠️\n"
+# define FORK_TAKEN "(%llu) Philo %d has taken a fork\n"
+# define EATING "(%llu) Philo %d is eating\n"
+# define SLEEPING "(%llu) Philo %d is sleeping\n"
+# define THINKING "(%llu) Philo %d is thinking\n"
+# define DAMOCLES_SWORD "(%lu) Philo %d has died\n"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>
@@ -41,7 +36,7 @@ typedef struct s_prg
 	u_int64_t		start;
 	int				running;
 	pthread_mutex_t	m_print;
-}	t_prg ;
+}	t_prg;
 
 typedef struct s_philo
 {
@@ -53,7 +48,7 @@ typedef struct s_philo
 	pthread_t		t_ph;
 	pthread_mutex_t	m_dead;
 	pthread_mutex_t	*m_fork;
-}	t_philo ;
+}	t_philo;
 
 int			ft_is_space(char a);
 int			ft_is_sign(char a);
@@ -68,4 +63,5 @@ int			is_he_alive(t_philo *ph);
 void		philo_eat(t_philo *ph, int left, int right);
 void		ft_usleep(u_int64_t time);
 void		print_action(t_philo *ph, char *msg, u_int64_t time);
+void		end_program(t_philo *ph);
 #endif
