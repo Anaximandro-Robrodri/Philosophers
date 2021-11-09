@@ -47,7 +47,8 @@ typedef struct s_philo
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	m_dead;
-	pthread_mutex_t	*m_fork;
+	pthread_mutex_t	*right;
+	pthread_mutex_t	*left;
 }	t_philo;
 
 int			ft_is_space(char a);
@@ -60,8 +61,8 @@ void		*routine(void *tid);
 u_int64_t	get_time_start(void);
 void		ft_dead_checker(t_philo *ph, int n);
 int			is_he_alive(t_philo *ph);
-void		philo_eat(t_philo *ph, int left, int right);
+void		action_eat(t_philo *ph);
 void		ft_usleep(u_int64_t time);
-void		print_action(t_philo *ph, char *msg, u_int64_t time);
+void		print_action(t_philo *ph, char *msg);
 void		end_program(t_philo *ph);
 #endif

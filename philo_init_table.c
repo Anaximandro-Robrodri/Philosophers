@@ -57,15 +57,29 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	return (m_f);
 }
 
+static void	ft_assign_forks(t_philo *ph, pthread_mutex_t *m_f)
+{
+	if (ph->idx == 1)
+	{
+		ph->right = &m_f[ph->idx - 1];
+		ph->left = &m_f[ph->prg->n_philo - 1];
+	}
+	else
+	{
+		ph->right = &m_f[ph->idx - 1];
+		ph->left = &m_f[ph->idx - 2];
+	}
+}
+
 static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
 {
 	pthread_mutex_init(&ph->m_dead, NULL);
 	ph->prg = prg;
 	ph->last_eat = prg->start;
 	ph->idx = i + 1;
-	ph->m_fork = m_f;
 	ph->alive = 1;
 	ph->count = 0;
+	ft_assign_forks(ph, m_f);
 }
 
 void	create_table(t_prg *prg)

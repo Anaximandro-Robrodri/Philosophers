@@ -53,7 +53,6 @@ void	ft_dead_checker(t_philo *ph, int n)
 				}
 			}
 			i++;
-			usleep(1000);
 		}
 	}
 }
@@ -76,26 +75,19 @@ int	is_he_alive(t_philo *ph)
 	return (1);
 }
 
-void	philo_eat(t_philo *ph, int left, int right)
+void	action_eat(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->m_fork[right]);
-	print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
-	ph->prg->forks[right] = 0;
-	pthread_mutex_lock(&ph->m_fork[left]);
-	print_action(ph, FORK_TAKEN, get_time_start() - ph->prg->start);
-	ph->prg->forks[left] = 0;
+	pthread_mutex_lock(ph->right);
+	print_action(ph, FORK_TAKEN);
+	pthread_mutex_lock(ph->left);
+	print_action(ph, FORK_TAKEN);
 	pthread_mutex_lock(&ph->m_dead);
-	if (!ph->prg->forks[right] && !ph->prg->forks[left])
-	{
-		ph->last_eat = get_time_start();
-		print_action(ph, EATING, ph->last_eat - ph->prg->start);
-		ft_usleep(ph->prg->eat);
-		ph->prg->forks[left] = 1;
-		ph->prg->forks[right] = 1;
-		if (ph->prg->n_eat > 0)
-			ph->count++;
-		pthread_mutex_unlock(&ph->m_fork[right]);
-		pthread_mutex_unlock(&ph->m_fork[left]);
-	}
+	print_action(ph, EATING);
+	ph->last_eat = get_time_start();
+	ft_usleep(ph->prg->eat);
+	if (ph->prg->n_eat > 0)
+		ph->count++;
+	pthread_mutex_unlock(ph->right);
+	pthread_mutex_unlock(ph->left);
 	pthread_mutex_unlock(&ph->m_dead);
 }
