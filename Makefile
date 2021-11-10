@@ -23,7 +23,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Ofast #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Ofast -Werror
 
 HEADER = philo.h
 
@@ -31,8 +31,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 		$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lpthread
-#$(OBJS): $(SRC)
-#	$(CC) $(FLAGS) -c $(SRC)
 
 clean :
 		rm -rf $(OBJS);

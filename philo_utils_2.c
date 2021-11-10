@@ -21,7 +21,7 @@ static int	check_philo_full(t_philo *ph, int n)
 	j = 0;
 	while (i < n)
 	{
-		if (ph[i].count >= ph[i].prg->n_eat)
+		if (ph[i].full)
 			j++;
 		i++;
 	}
@@ -87,7 +87,11 @@ void	action_eat(t_philo *ph)
 	ph->last_eat = get_time_start();
 	ft_usleep(ph->prg->eat);
 	if (ph->prg->n_eat > 0)
+	{
 		ph->count++;
+		if (ph->count == ph->prg->n_eat)
+			ph->full = 1;
+	}
 	pthread_mutex_unlock(ph->right);
 	pthread_mutex_unlock(ph->left);
 	pthread_mutex_unlock(&ph->m_dead);

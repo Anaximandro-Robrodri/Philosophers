@@ -71,15 +71,23 @@ static void	ft_assign_forks(t_philo *ph, pthread_mutex_t *m_f)
 	}
 }
 
-static void	init_philos(t_philo *ph, t_prg *prg, int i, pthread_mutex_t	*m_f)
+static void	init_philos(t_philo *ph, t_prg *prg,pthread_mutex_t	*m_f)
 {
-	pthread_mutex_init(&ph->m_dead, NULL);
-	ph->prg = prg;
-	ph->last_eat = prg->start;
-	ph->idx = i + 1;
-	ph->alive = 1;
-	ph->count = 0;
-	ft_assign_forks(ph, m_f);
+	int	i;
+
+	i = 0;
+	while (i < prg->n_philo)
+	{
+		pthread_mutex_init(&ph->m_dead, NULL);
+		ph[i].prg = prg;
+		ph[i].last_eat = prg->start;
+		ph[i].idx = i + 1;
+		ph[i].alive = 1;
+		ph[i].count = 0;
+		ph[i].full = 0;
+		ft_assign_forks(&ph[i], m_f);
+		i++;
+	}
 }
 
 void	create_table(t_prg *prg)
@@ -95,20 +103,12 @@ void	create_table(t_prg *prg)
 		return ;
 	m_f = init_forks(m_f, prg->n_philo, prg);
 	i = 0;
+	init_philos(ph, prg, m_f);
 	while (i < prg->n_philo)
 	{
-		init_philos(&ph[i], prg, i, m_f);
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-		i+=2;
-		usleep(100);
-	}
-	i = 1;
-	while (i < prg->n_philo)
-	{
-		init_philos(&ph[i], prg, i, m_f);
-		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
-		i+=2;
-		usleep(100);
+		i++;
+//		usleep(100);
 	}
 	ft_dead_checker(ph, prg->n_philo);
 //	ft_join_threads(ph, prg->n_philo);

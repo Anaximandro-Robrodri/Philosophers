@@ -44,6 +44,7 @@ typedef struct s_philo
 	int				idx;
 	u_int64_t		last_eat;
 	int				count;
+	int				full;
 	t_prg			*prg;
 	pthread_t		t_ph;
 	pthread_mutex_t	m_dead;
