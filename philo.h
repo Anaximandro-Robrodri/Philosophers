@@ -13,11 +13,11 @@
 #ifndef PHILO_H
 # define PHILO_H
 # define MAX_PHILO 200
-# define FORK_TAKEN "(%llu) Philo %d has taken a fork\n"
-# define EATING "(%llu) Philo %d is eating\n"
-# define SLEEPING "(%llu) Philo %d is sleeping\n"
-# define THINKING "(%llu) Philo %d is thinking\n"
-# define DAMOCLES_SWORD "(%lu) Philo %d has died\n"
+# define FORK_TAKEN "%lu %d has taken a fork\n"
+# define EATING "%lu %d is eating\n"
+# define SLEEPING "%lu %d is sleeping\n"
+# define THINKING "%lu %d is thinking\n"
+# define DAMOCLES_SWORD "%lu %d died\n"
 # include <stdio.h>
 # include <pthread.h>
 # include <string.h>
@@ -32,7 +32,6 @@ typedef struct s_prg
 	int				eat;
 	int				slp;
 	int				n_eat;
-	int				*forks;
 	u_int64_t		start;
 	int				running;
 	pthread_mutex_t	m_print;
@@ -66,4 +65,5 @@ void		action_eat(t_philo *ph);
 void		ft_usleep(u_int64_t time);
 void		print_action(t_philo *ph, char *msg);
 void		end_program(t_philo *ph);
+void		ft_join_threads(t_philo *ph, int n);
 #endif

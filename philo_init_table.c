@@ -12,18 +12,6 @@
 
 #include "philo.h"
 
-/*static void	ft_join_threads(t_philo *ph, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		pthread_join(ph[i].t_ph, NULL);
-		i++;
-	}
-}*/
-
 static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg, t_philo *ph)
 {
 	int	i;
@@ -36,7 +24,6 @@ static void	ft_destroy_mutex(pthread_mutex_t *m_f, t_prg *prg, t_philo *ph)
 		i++;
 	}
 	pthread_mutex_destroy(&prg->m_print);
-	free(prg->forks);
 	free(m_f);
 }
 
@@ -48,7 +35,6 @@ static pthread_mutex_t	*init_forks(pthread_mutex_t *m_f, int n, t_prg *prg)
 	while (i < n)
 	{
 		pthread_mutex_init(&m_f[i], NULL);
-		prg->forks[i] = 1;
 		i++;
 	}
 	pthread_mutex_init(&prg->m_print, NULL);
@@ -71,7 +57,7 @@ static void	ft_assign_forks(t_philo *ph, pthread_mutex_t *m_f)
 	}
 }
 
-static void	init_philos(t_philo *ph, t_prg *prg,pthread_mutex_t	*m_f)
+static void	init_philos(t_philo *ph, t_prg *prg, pthread_mutex_t *m_f)
 {
 	int	i;
 
@@ -97,9 +83,8 @@ void	create_table(t_prg *prg)
 	int				i;
 
 	ph = malloc(sizeof(t_philo) * prg->n_philo);
-	prg->forks = malloc(sizeof(int) * prg->n_philo);
 	m_f = malloc(sizeof(pthread_mutex_t) * prg->n_philo);
-	if (!ph || !m_f || !prg->forks)
+	if (!ph || !m_f)
 		return ;
 	m_f = init_forks(m_f, prg->n_philo, prg);
 	i = 0;
@@ -108,10 +93,9 @@ void	create_table(t_prg *prg)
 	{
 		pthread_create(&ph[i].t_ph, NULL, routine, &ph[i]);
 		i++;
-//		usleep(100);
 	}
 	ft_dead_checker(ph, prg->n_philo);
-//	ft_join_threads(ph, prg->n_philo);
+	ft_join_threads(ph, prg->n_philo);
 	ft_destroy_mutex(m_f, prg, ph);
 	free(ph);
 	return ;

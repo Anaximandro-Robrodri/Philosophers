@@ -23,7 +23,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Ofast -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 HEADER = philo.h
 
